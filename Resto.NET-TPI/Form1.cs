@@ -10,6 +10,14 @@ namespace Resto.NET_TPI
             
         }
 
-        
+        private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cargarPlanoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+             
+        }
     }
 }

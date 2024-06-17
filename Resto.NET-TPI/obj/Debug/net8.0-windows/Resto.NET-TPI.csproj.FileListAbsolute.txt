@@ -15,3 +15,4 @@ C:\Users\nicoc\source\repos\Resto.NET-TPI\Resto.NET-TPI\obj\Debug\net8.0-windows
 C:\Users\nicoc\source\repos\Resto.NET-TPI\Resto.NET-TPI\obj\Debug\net8.0-windows\Resto.NET-TPI.pdb
 C:\Users\nicoc\source\repos\Resto.NET-TPI\Resto.NET-TPI\obj\Debug\net8.0-windows\Resto.NET-TPI.genruntimeconfig.cache
 C:\Users\nicoc\source\repos\Resto.NET-TPI\Resto.NET-TPI\obj\Debug\net8.0-windows\ref\Resto.NET-TPI.dll
+C:\Users\nicoc\source\repos\Resto.NET-TPI\Resto.NET-TPI\obj\Debug\net8.0-windows\Resto.NET-TPI.sourcelink.json

@@ -62,18 +62,20 @@
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             archivoToolStripMenuItem.Size = new Size(60, 20);
             archivoToolStripMenuItem.Text = "Archivo";
+            archivoToolStripMenuItem.Click += archivoToolStripMenuItem_Click;
             // 
             // guardarPlanoToolStripMenuItem
             // 
             guardarPlanoToolStripMenuItem.Name = "guardarPlanoToolStripMenuItem";
-            guardarPlanoToolStripMenuItem.Size = new Size(180, 22);
+            guardarPlanoToolStripMenuItem.Size = new Size(149, 22);
             guardarPlanoToolStripMenuItem.Text = "Guardar plano";
             // 
             // cargarPlanoToolStripMenuItem
             // 
             cargarPlanoToolStripMenuItem.Name = "cargarPlanoToolStripMenuItem";
-            cargarPlanoToolStripMenuItem.Size = new Size(180, 22);
+            cargarPlanoToolStripMenuItem.Size = new Size(149, 22);
             cargarPlanoToolStripMenuItem.Text = "Cargar plano";
+            cargarPlanoToolStripMenuItem.Click += cargarPlanoToolStripMenuItem_Click;
             // 
             // vistaToolStripMenuItem
             // 
@@ -119,7 +121,7 @@
             button1.Image = (Image)resources.GetObject("button1.Image");
             button1.Location = new Point(3, 3);
             button1.Name = "button1";
-            button1.Size = new Size(100, 54);
+            button1.Size = new Size(80, 80);
             button1.TabIndex = 1;
             button1.UseVisualStyleBackColor = true;
             // 
