@@ -40,6 +40,7 @@
             panelHerramientas = new Panel();
             button1 = new Button();
             panelDiseño = new Panel();
+            miGrilla = new MiGrilla();
             propertyGrid1 = new PropertyGrid();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             menuStrip1.SuspendLayout();
@@ -89,12 +90,14 @@
             modoEdiciónToolStripMenuItem.Name = "modoEdiciónToolStripMenuItem";
             modoEdiciónToolStripMenuItem.Size = new Size(193, 22);
             modoEdiciónToolStripMenuItem.Text = "Modo edición";
+            modoEdiciónToolStripMenuItem.Click += modoEdiciónToolStripMenuItem_Click_1;
             // 
             // modoToolStripMenuItem
             // 
             modoToolStripMenuItem.Name = "modoToolStripMenuItem";
             modoToolStripMenuItem.Size = new Size(193, 22);
             modoToolStripMenuItem.Text = "Modo previsualización";
+            modoToolStripMenuItem.Click += modoToolStripMenuItem_Click_1;
             // 
             // statusStrip1
             // 
@@ -127,13 +130,24 @@
             // 
             // panelDiseño
             // 
+            panelDiseño.BackgroundImage = Properties.Resources.bar;
             panelDiseño.BorderStyle = BorderStyle.FixedSingle;
             panelDiseño.Controls.Add(propertyGrid1);
+            panelDiseño.Controls.Add(miGrilla);
             panelDiseño.Dock = DockStyle.Fill;
             panelDiseño.Location = new Point(200, 24);
             panelDiseño.Name = "panelDiseño";
             panelDiseño.Size = new Size(984, 715);
             panelDiseño.TabIndex = 3;
+            // 
+            // miGrilla
+            // 
+            miGrilla.BackgroundImage = Properties.Resources.bar;
+            miGrilla.Dock = DockStyle.Fill;
+            miGrilla.Location = new Point(0, 0);
+            miGrilla.Name = "miGrilla";
+            miGrilla.Size = new Size(982, 713);
+            miGrilla.TabIndex = 1;
             // 
             // propertyGrid1
             // 
@@ -148,6 +162,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.bar;
             ClientSize = new Size(1184, 761);
             Controls.Add(panelDiseño);
             Controls.Add(panelHerramientas);
@@ -179,5 +194,6 @@
         private PropertyGrid propertyGrid1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button button1;
+        private MiGrilla miGrilla;
     }
 }
