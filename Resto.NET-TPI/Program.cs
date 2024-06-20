@@ -1,4 +1,4 @@
-namespace Resto.NET_TPI
+namespace PANELHERRAMIENTAS
 {
     internal static class Program
     {
