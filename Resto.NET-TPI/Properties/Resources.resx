@@ -121,4 +121,37 @@
   <data name="bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Banqueta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banqueta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="divisorHorizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\divisorHorizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="divisorVertical" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\divisorVertical.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaCuatroCircu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaCuatroCircu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaCuatroRectang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaCuatroRectang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaDosCircu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaDosCircu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaDosRectang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaDosRectang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaOchoCircu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaOchoCircu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaOchoRectang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaOchoRectang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaSeisCircu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaSeisCircu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mesaParaSeisRectang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesaParaSeisRectang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
