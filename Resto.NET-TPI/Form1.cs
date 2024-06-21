@@ -108,7 +108,10 @@ namespace Resto.NET_TPI
             pictureBox.Size = new Size(100, 100);
             // pictureBox.Location = new Point(cantidadImagen * 110, 10);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;//Establece SizeMode a StretchImage para ajustar la imagen 
-            miGrilla.Controls.Add(pictureBox); //Agregar cada PictureBox creado al control del contenedor mi grilla
+            
+
+            panelDiseño.Controls.Add(pictureBox); //Agregar cada PictureBox creado al control del contenedor panelDiseño
+            pictureBox.BringToFront();
 
             //Agregar los manejadores de eventos de arrastre
             pictureBox.MouseDown += PictureBox_MouseDown;
