@@ -83,11 +83,12 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = SystemColors.Control;
             menuStrip1.ImageScalingSize = new Size(24, 24);
             menuStrip1.Items.AddRange(new ToolStripItem[] { archivoToolStripMenuItem, vistaToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1184, 24);
+            menuStrip1.Size = new Size(1385, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -97,7 +98,6 @@
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             archivoToolStripMenuItem.Size = new Size(60, 20);
             archivoToolStripMenuItem.Text = "Archivo";
-            archivoToolStripMenuItem.Click += archivoToolStripMenuItem_Click;
             // 
             // guardarPlanoToolStripMenuItem
             // 
@@ -110,7 +110,6 @@
             cargarPlanoToolStripMenuItem.Name = "cargarPlanoToolStripMenuItem";
             cargarPlanoToolStripMenuItem.Size = new Size(149, 22);
             cargarPlanoToolStripMenuItem.Text = "Cargar plano";
-            cargarPlanoToolStripMenuItem.Click += cargarPlanoToolStripMenuItem_Click;
             // 
             // vistaToolStripMenuItem
             // 
@@ -137,9 +136,9 @@
             // 
             statusStrip1.BackColor = SystemColors.Control;
             statusStrip1.ImageScalingSize = new Size(24, 24);
-            statusStrip1.Location = new Point(0, 608);
+            statusStrip1.Location = new Point(0, 742);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1184, 22);
+            statusStrip1.Size = new Size(1385, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -151,7 +150,7 @@
             panelHerramientas.Dock = DockStyle.Left;
             panelHerramientas.Location = new Point(0, 24);
             panelHerramientas.Name = "panelHerramientas";
-            panelHerramientas.Size = new Size(200, 584);
+            panelHerramientas.Size = new Size(200, 718);
             panelHerramientas.TabIndex = 2;
             // 
             // panel2
@@ -163,24 +162,25 @@
             panel2.Controls.Add(btnSilla);
             panel2.Controls.Add(panelMesa);
             panel2.Controls.Add(btnMesa);
-            panel2.Dock = DockStyle.Top;
+            panel2.Dock = DockStyle.Fill;
             panel2.ForeColor = Color.Thistle;
             panel2.Location = new Point(0, 36);
             panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(198, 520);
+            panel2.Size = new Size(198, 680);
             panel2.TabIndex = 1;
             // 
             // btnDeshacer
             // 
+            btnDeshacer.AutoSize = true;
             btnDeshacer.BackColor = Color.Plum;
             btnDeshacer.Dock = DockStyle.Bottom;
             btnDeshacer.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDeshacer.ForeColor = SystemColors.ActiveCaptionText;
-            btnDeshacer.Location = new Point(0, 473);
+            btnDeshacer.Location = new Point(0, 650);
             btnDeshacer.Margin = new Padding(2);
             btnDeshacer.Name = "btnDeshacer";
-            btnDeshacer.Size = new Size(198, 47);
+            btnDeshacer.Size = new Size(198, 30);
             btnDeshacer.TabIndex = 0;
             btnDeshacer.Text = "Deshacer ult acción";
             btnDeshacer.UseVisualStyleBackColor = false;
@@ -191,23 +191,24 @@
             panelDivisor.BackColor = Color.BlanchedAlmond;
             panelDivisor.Controls.Add(btnVertical);
             panelDivisor.Controls.Add(bntHorizontal);
-            panelDivisor.Dock = DockStyle.Top;
+            panelDivisor.Dock = DockStyle.Fill;
             panelDivisor.Location = new Point(0, 425);
             panelDivisor.Margin = new Padding(2);
             panelDivisor.Name = "panelDivisor";
-            panelDivisor.Size = new Size(198, 66);
+            panelDivisor.Size = new Size(198, 255);
             panelDivisor.TabIndex = 4;
             // 
             // btnVertical
             // 
+            btnVertical.AutoSize = true;
             btnVertical.BackColor = Color.Cornsilk;
             btnVertical.Dock = DockStyle.Top;
             btnVertical.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnVertical.ForeColor = SystemColors.ActiveCaptionText;
-            btnVertical.Location = new Point(0, 25);
+            btnVertical.Location = new Point(0, 37);
             btnVertical.Margin = new Padding(2);
             btnVertical.Name = "btnVertical";
-            btnVertical.Size = new Size(198, 25);
+            btnVertical.Size = new Size(198, 34);
             btnVertical.TabIndex = 6;
             btnVertical.Text = "Vertical";
             btnVertical.UseVisualStyleBackColor = false;
@@ -215,6 +216,7 @@
             // 
             // bntHorizontal
             // 
+            bntHorizontal.AutoSize = true;
             bntHorizontal.BackColor = Color.Cornsilk;
             bntHorizontal.Dock = DockStyle.Top;
             bntHorizontal.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
@@ -222,7 +224,7 @@
             bntHorizontal.Location = new Point(0, 0);
             bntHorizontal.Margin = new Padding(2);
             bntHorizontal.Name = "bntHorizontal";
-            bntHorizontal.Size = new Size(198, 25);
+            bntHorizontal.Size = new Size(198, 37);
             bntHorizontal.TabIndex = 5;
             bntHorizontal.Text = "Horizontal";
             bntHorizontal.UseVisualStyleBackColor = false;
@@ -462,6 +464,7 @@
             // 
             btnRec2.BackColor = Color.BlanchedAlmond;
             btnRec2.Dock = DockStyle.Top;
+            btnRec2.FlatStyle = FlatStyle.Flat;
             btnRec2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnRec2.ForeColor = SystemColors.ActiveCaptionText;
             btnRec2.Location = new Point(0, 25);
@@ -534,12 +537,12 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Arial Narrow", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ImageAlign = ContentAlignment.BottomCenter;
-            label1.Location = new Point(8, 9);
+            label1.Location = new Point(41, 11);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(134, 24);
+            label1.Size = new Size(111, 23);
             label1.TabIndex = 0;
             label1.Text = "Herramientas";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -554,15 +557,15 @@
             panelDiseño.ForeColor = SystemColors.ControlText;
             panelDiseño.Location = new Point(200, 24);
             panelDiseño.Name = "panelDiseño";
-            panelDiseño.Size = new Size(984, 584);
+            panelDiseño.Size = new Size(1185, 718);
             panelDiseño.TabIndex = 3;
             // 
             // propertyGrid1
             // 
             propertyGrid1.Dock = DockStyle.Right;
-            propertyGrid1.Location = new Point(784, 0);
+            propertyGrid1.Location = new Point(985, 0);
             propertyGrid1.Name = "propertyGrid1";
-            propertyGrid1.Size = new Size(200, 584);
+            propertyGrid1.Size = new Size(200, 718);
             propertyGrid1.TabIndex = 0;
             propertyGrid1.Visible = false;
             // 
@@ -573,7 +576,7 @@
             miGrilla.Dock = DockStyle.Fill;
             miGrilla.Location = new Point(0, 0);
             miGrilla.Name = "miGrilla";
-            miGrilla.Size = new Size(984, 584);
+            miGrilla.Size = new Size(1185, 718);
             miGrilla.TabIndex = 1;
             // 
             // Form1
@@ -581,7 +584,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.bar;
-            ClientSize = new Size(1184, 630);
+            ClientSize = new Size(1385, 764);
             Controls.Add(panelDiseño);
             Controls.Add(panelHerramientas);
             Controls.Add(statusStrip1);
@@ -593,7 +596,9 @@
             menuStrip1.PerformLayout();
             panelHerramientas.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             panelDivisor.ResumeLayout(false);
+            panelDivisor.PerformLayout();
             panelMesa.ResumeLayout(false);
             panelMesa8.ResumeLayout(false);
             panelMesa6.ResumeLayout(false);
