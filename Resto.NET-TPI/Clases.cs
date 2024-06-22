@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Resto.NET_TPI
 {
@@ -14,21 +15,23 @@ namespace Resto.NET_TPI
 
     public abstract class ElementoRestaurante
     {
-
-        public Point Posicion { get; set; }//Investigar sobre Point
-        public ElementoRestaurante()
-        {
-        }
+        public Point Posicion { get; set; }
+        public int Numero { get; set; } // Número de mesa/silla
+        public bool Ocupado { get; set; }
+        public List<string> Consumo { get; set; }
+        public TimeSpan Permanencia { get; set; }
+        
     }
 
     public class Mesa : ElementoRestaurante
     {
-        public int nro { get; set; }
         public int cantSillas { get; set; }//va por defecto dependiendo del tipo de mesa
         public char estado { get; set; } //{L,O,R} si se encuentra ocupada, reservado o libre
         public Boolean MesaCuadrada { get; set; }
         public Boolean MesaSimple { get; set; }//true
         public List<Silla> sillas { get; set; }
+        
+        
 
 
         public Mesa()
@@ -222,6 +225,32 @@ namespace Resto.NET_TPI
         }
 
 
+    }
+
+    public static class ControlExtensions 
+    {
+        //Clase estática ControlExtensions:
+
+        //Es una clase estática que contiene métodos de extensión para la clase Control y sus derivados.Los métodos de extensión permiten agregar funcionalidad a tipos existentes sin modificar su estructura original.
+        //Método de extensión EnableDoubleBuffering:
+
+        //Este método extiende la funcionalidad de cualquier objeto Control, permitiendo que se aplique el doble búfer a dicho control.
+        //Uso de reflexión:
+
+        //Utiliza la reflexión (System.Reflection) para acceder a la propiedad protegida DoubleBuffered de la clase Control.
+        //GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic): Este método estático GetProperty busca una propiedad llamada "DoubleBuffered" en la instancia específica del control(Instance) y permite acceder a propiedades no públicas(NonPublic).
+        //Habilitación del doble búfer:
+
+        //doubleBufferPropertyInfo.SetValue(control, true, null);: Una vez obtenida la propiedad DoubleBuffered, se utiliza SetValue para establecer su valor en true, lo que habilita el doble búfer para ese control específico.
+        //Funcionamiento del doble búfer:
+        //Doble búfer (Double Buffering): Es una técnica utilizada en interfaces gráficas para reducir el parpadeo (flickering) al renderizar controles, especialmente útil cuando se actualiza frecuentemente el contenido de la interfaz de usuario.
+        //Beneficios: Al habilitar el doble búfer, se renderiza primero en un búfer de memoria oculto y luego se muestra en la pantalla, evitando la visibilidad temporal de dibujos parciales.
+        
+        public static void EnableDoubleBuffering(this Control control)
+        {
+            System.Reflection.PropertyInfo? doubleBufferPropertyInfo = control.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            doubleBufferPropertyInfo.SetValue(control, true, null);
+        }
     }
 }
 
