@@ -20,7 +20,7 @@ namespace Resto.NET_TPI
         public bool Ocupado { get; set; }
         public List<string> Consumo { get; set; }
         public TimeSpan Permanencia { get; set; }
-        
+        public int Mozo { get; set; }
     }
 
     public class Mesa : ElementoRestaurante
@@ -206,7 +206,7 @@ namespace Resto.NET_TPI
     }
 
 
-    public class Mozo
+    /*public class Mozo
     {
         public int MesasACargo { get; set; }
         public List<Mesa> mesas { get; set; }
@@ -218,14 +218,15 @@ namespace Resto.NET_TPI
             mesas = new List<Mesa>();
             MesasACargo = 0;
         }
-        public void asignarMesa(Mesa mesa)
+
+    public void asignarMesa(Mesa mesa)
         {
             mesas.Add(mesa);
             MesasACargo++;
         }
 
 
-    }
+    }*/
 
     public static class ControlExtensions 
     {
