@@ -1,4 +1,5 @@
 using Resto.NET_TPI.Properties;
+using System.Diagnostics;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
@@ -11,6 +12,8 @@ namespace Resto.NET_TPI
         List<PictureBox> paneles = new List<PictureBox>(); //lista para borrar.
         private Dictionary<PictureBox, ElementoRestaurante> pictureBoxToElemento = new Dictionary<PictureBox, ElementoRestaurante>();
         private bool esModoPrevisualizacion = false;
+        private int contadorMesa = 0;
+        private Point ultimaPosicion;
 
 
 
@@ -162,6 +165,7 @@ namespace Resto.NET_TPI
             miGrilla.Visible = false;
             panelHerramientas.Visible = false;
             ActualizarVisibilidadLabels();
+            ActualizarEstadoEliminarItem();
         }
         private void modoEdiciónToolStripMenuItem_Click_1(object sender, EventArgs e) //Modo Edicion
         {
@@ -170,6 +174,7 @@ namespace Resto.NET_TPI
             propertyGrid1.Visible = false;
             panelHerramientas.Visible = true;
             ActualizarVisibilidadLabels();
+            ActualizarEstadoEliminarItem();
         }
 
         //En cada botón de los paneles de la barra de Herram llamamos al método para que sea visible
@@ -221,32 +226,87 @@ namespace Resto.NET_TPI
             pictureBox.Size = new Size(100, 100);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;//Establece SizeMode a StretchImage para ajustar la imagen
 
-
+            Point posicion;
+            Random random = new Random();
+            bool hayPosicionDisponible = false; //Variable que me indica que hay una posición disponible para crear mesa/silla
+            int maxIntentos = 1000; //La cantidad de veces que intenta encontrar una posición
+            int intentos = 0;
             //Agregar cada PictureBox creado al control del contenedor panelDiseño
             panelDiseño.Controls.Add(pictureBox);
             pictureBox.BringToFront();
 
             pictureBoxToElemento.Add(pictureBox, elementoRestaurante);
 
-            //Agregar los manejadores de eventos de arrastre
-            pictureBox.MouseDown += PictureBox_MouseDown;
-            pictureBox.MouseMove += PictureBox_MouseMove;
-            pictureBox.MouseUp += PictureBox_MouseUp;
-            pictureBox.MouseClick += PictureBox_MouseClick;
+
+            while (intentos < maxIntentos)
+            {
+                posicion = new Point(random.Next(panelDiseño.Width - pictureBox.Size.Width), random.Next(panelDiseño.Height - pictureBox.Size.Height));
+
+                if (!HayColision(posicion, pictureBox.Size, null))
+                {
+                    hayPosicionDisponible = true;
+                    pictureBox.Location = posicion;
+                    break;
+                }
+                intentos++;
+            }
+
+            if (!hayPosicionDisponible)
+            {
+                MessageBox.Show("No hay más lugar para agregar.");
+            }
+            else
+            {
+                //Agregar los manejadores de eventos de arrastre
+                pictureBox.MouseDown += PictureBox_MouseDown;
+                pictureBox.MouseMove += PictureBox_MouseMove;
+                pictureBox.MouseUp += PictureBox_MouseUp;
+
+                panelDiseño.Controls.Add(pictureBox); //Agregar cada PictureBox creado al control del contenedor panelDiseño
+                pictureBox.BringToFront();
+                ActualizarElementoInterfaz(pictureBox, elementoRestaurante);
+                ActualizarVisibilidadLabels();
+                ContextMenuStrip contextMenu = new ContextMenuStrip();
+                ToolStripMenuItem eliminarItem = new ToolStripMenuItem("Eliminar");
+
+                eliminarItem.Click += (s, e) =>
+                {
+
+                    panelDiseño.Controls.Remove(pictureBox);
+                    paneles.Remove(pictureBox);
+                };
 
 
-            paneles.Add(pictureBox);//se agrega a la lista por si se necesita eliminar
-            ActualizarElementoInterfaz(pictureBox, elementoRestaurante);
-            ActualizarVisibilidadLabels();
+
+                contextMenu.Items.Add(eliminarItem);
+                pictureBox.ContextMenuStrip = contextMenu;
+                //cantidadImagen++; (VER SI ES NECESARIO para el modo PreVisualización)
+                paneles.Add(pictureBox);//se agrega a la lista por si se necesita eliminar
+            }
+
+        }
+
+        private void ActualizarEstadoEliminarItem()
+        {
+            foreach(PictureBox pictureBox in paneles)
+            {
+
+                ToolStripMenuItem eliminar = (ToolStripMenuItem)pictureBox.ContextMenuStrip.Items[0];
+                eliminar.Enabled = !esModoPrevisualizacion;
+
+            }
         }
 
         //Métodos y eventos para arrastrar la imagen
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             // Al hacer clic en el PictureBox, se establece el PictureBox que se está arrastrando y se registra la posición de inicio del mouse
-            arrastreImagen = sender as PictureBox;
-            coordenadasImagen = e.Location;
-            arrastreImagen.BringToFront();
+            if (e.Button == MouseButtons.Left)
+            {
+                arrastreImagen = sender as PictureBox;
+                coordenadasImagen = e.Location;
+                ultimaPosicion = arrastreImagen.Location;
+            }
 
             if (arrastreImagen != null && esModoPrevisualizacion && e.Button == MouseButtons.Left)
             {
@@ -257,12 +317,22 @@ namespace Resto.NET_TPI
         }
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if (arrastreImagen != null && esModoPrevisualizacion && e.Button == MouseButtons.Left)
-            {
-                // Actualizar la posición del objeto asociado en el diccionario
-                pictureBoxToElemento[arrastreImagen].Posicion = arrastreImagen.Location;
 
+            if (arrastreImagen != null)
+            {
+                if (HayColision(arrastreImagen.Location, arrastreImagen.Size, arrastreImagen))
+                {
+                    arrastreImagen.Location = ultimaPosicion;
+                }
+                else
+                {
+                    ultimaPosicion = arrastreImagen.Location;
+                }
             }
+
+            // Cuando se suelta el botón del mouse, se restablece el PictureBox que se está arrastrando
+            arrastreImagen = null;
+
 
         }
 
@@ -297,8 +367,10 @@ namespace Resto.NET_TPI
                 else if (y + arrastreImagen.Height > miGrilla.Height)
                     y = miGrilla.Height - arrastreImagen.Height;
 
-                // Se establece la nueva posición del PictureBox arrastrado
-                arrastreImagen.Location = new Point(x, y);
+               
+                Point nuevaUbicacion = new Point(x, y);
+
+                arrastreImagen.Location = nuevaUbicacion;
 
 
                 panelDiseño.Refresh(); //refresca el panel forzando el redibujado de todo el panel y sus controles.
@@ -443,6 +515,40 @@ namespace Resto.NET_TPI
                     }
                 }
             }
+
+
+
+
         }
+        private bool HayColision(Point posicion, Size tamano, Control ignoreControl)
+        {
+            // Crea un rectángulo basado en la posición y tamaño especificados.
+            Rectangle rect = new Rectangle(posicion, tamano);
+
+            // Itera a través de todos los PictureBox en la lista de paneles.
+            foreach (PictureBox pictureBox in paneles)
+            {
+                // Si el PictureBox actual es el que se debe ignorar, continúa con el siguiente.
+                if (pictureBox == ignoreControl) continue;
+
+                // Crea un rectángulo para el PictureBox actual basado en su ubicación y tamaño.
+                Rectangle exRect = new Rectangle(pictureBox.Location, pictureBox.Size);
+
+                // Verifica si el rectángulo especificado intersecta con el rectángulo del PictureBox actual.
+                if (rect.IntersectsWith(exRect))
+                {
+                    // Si hay una intersección, retorna true indicando una colisión.
+                    return true;
+                }
+            }
+
+
+
+
+
+            // Si no se detecta ninguna colisión después de verificar todos los PictureBox, retorna false
+            return false;
+        }
+
     }
 }

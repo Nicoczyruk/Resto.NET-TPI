@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Brendii\\Downloads\\Resto.NET-TPI-master (1)\\Resto.NET-TPI-master\\Resto.NET-TPI\\Resto.NET-TPI.csproj": {}
+    "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Brendii\\Downloads\\Resto.NET-TPI-master (1)\\Resto.NET-TPI-master\\Resto.NET-TPI\\Resto.NET-TPI.csproj": {
+    "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Brendii\\Downloads\\Resto.NET-TPI-master (1)\\Resto.NET-TPI-master\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
+        "projectUniqueName": "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
         "projectName": "Resto.NET-TPI",
-        "projectPath": "C:\\Users\\Brendii\\Downloads\\Resto.NET-TPI-master (1)\\Resto.NET-TPI-master\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
-        "packagesPath": "C:\\Users\\Brendii\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Brendii\\Downloads\\Resto.NET-TPI-master (1)\\Resto.NET-TPI-master\\Resto.NET-TPI\\obj\\",
+        "projectPath": "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
+        "packagesPath": "C:\\Users\\Gonza\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Brendii\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gonza\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

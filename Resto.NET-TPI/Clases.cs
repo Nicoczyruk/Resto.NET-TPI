@@ -21,6 +21,18 @@ namespace Resto.NET_TPI
         public List<string> Consumo { get; set; }
         public TimeSpan Permanencia { get; set; }
         public int Mozo { get; set; }
+        public bool esFija;
+
+        public void Fix()
+        {
+            esFija = true;
+        }
+
+        public void UnFix()
+        {
+            esFija = false;
+        }
+
     }
 
     public class Mesa : ElementoRestaurante
@@ -40,6 +52,7 @@ namespace Resto.NET_TPI
             this.estado = 'L';
             this.MesaCuadrada = true;
             this.MesaSimple = true;
+            esFija = false;
         }
 
         public void tipoMesa(Boolean cuadrada, Boolean simple)
@@ -132,6 +145,7 @@ namespace Resto.NET_TPI
 
         public Silla()
         {
+            esFija = false;
             this.estado = false;
             this.ClienteActual = null;
             this.barra = false;
@@ -160,6 +174,7 @@ namespace Resto.NET_TPI
 
         public Divisor()
         {
+            esFija = false;
         }
     }
 
