@@ -77,7 +77,8 @@ namespace Resto.NET_TPI
             string numero = elemento.Numero.ToString() ?? "N/A"; //null-coalescing operator -> sirve para proporcionar un valor "por defecto" en caso de la que la expresion a la izq
                                                                  //sea null
             string ocupadoTexto = elemento.Ocupado ? "Sí" : "No";
-            infoLabel.Text = $"Nro: {numero}\nOcupado: {ocupadoTexto}\nConsumo: ${45}";
+            string MozoAsignado = elemento.Mozo.ToString();
+            infoLabel.Text = $"Nro: {numero}\nOcupado: {ocupadoTexto}\nConsumo: ${45}\nMozo: {MozoAsignado}";
 
             // Posicionar el Label sobre el PictureBox
             infoLabel.Location = new Point(pictureBox.Left, pictureBox.Top - infoLabel.Height);
