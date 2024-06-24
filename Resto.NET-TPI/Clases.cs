@@ -18,7 +18,8 @@ namespace Resto.NET_TPI
         public Point Posicion { get; set; }
         public int Numero { get; set; } // Número de mesa/silla
         public bool Ocupado { get; set; }
-        public List<string> Consumo { get; set; }
+        public bool Reservado { get; set; }
+        public List<Consumo> Consumos { get; set; }
         public TimeSpan Permanencia { get; set; }
         public int Mozo { get; set; }
         public bool esFija;
@@ -33,102 +34,93 @@ namespace Resto.NET_TPI
             esFija = false;
         }
 
+        public ElementoRestaurante()
+        {
+            Consumos = new List<Consumo>();
+        }
     }
 
     public class Mesa : ElementoRestaurante
     {
-        public int cantSillas { get; set; }//va por defecto dependiendo del tipo de mesa
-        public char estado { get; set; } //{L,O,R} si se encuentra ocupada, reservado o libre
-        public Boolean MesaCuadrada { get; set; }
-        public Boolean MesaSimple { get; set; }//true
-        public List<Silla> sillas { get; set; }
-        
-        
+        private List<Cliente> clientes = new List<Cliente>();
 
+        public int CantSillas { get; set; } //va por defecto dependiendo del tipo de mesa
+
+        public List<Cliente> Clientes
+        {
+            get { return clientes; }
+            set
+            {
+                // Verificar si la cantidad de clientes excede la cantidad de sillas
+                if (value.Count > CantSillas)
+                {
+                    // Tomar solo la cantidad de clientes que cabe en la mesa
+                    clientes = value.Take(CantSillas).ToList();
+                }
+                else
+                {
+                    // Si no excede, asignar la lista completa
+                    clientes = value;
+                }
+
+                ActualizarConsumos();
+            }
+        }
+        // Ocultar la propiedad Ocupado de la clase base
+        public new bool Ocupado
+        {
+            get { return base.Ocupado; }
+            set
+            {
+                if (base.Ocupado != value)
+                {
+                    base.Ocupado = value;
+                    if (base.Ocupado)
+                    {
+                        // Si se establece a true, agregar aleatoriamente clientes
+                        AgregarClientesAleatorios();
+                    }
+                    else
+                    {
+                        // Si se establece a false, borrar la lista de clientes
+                        clientes.Clear();
+                        Consumos.Clear();
+                    }
+                }
+            }
+        }
 
         public Mesa()
         {
-            sillas = new List<Silla>();
-            this.estado = 'L';
-            this.MesaCuadrada = true;
-            this.MesaSimple = true;
+
             esFija = false;
         }
 
-        public void tipoMesa(Boolean cuadrada, Boolean simple)
+        public void ActualizarConsumos()
         {
-            this.MesaCuadrada = cuadrada;
-            this.MesaSimple = simple;
-            CargarSillas();
-        }
-        //cantidad de sillas por defecto dependiendo del tipo de mesa
-        private void CargarSillas()
-        {
-            if (MesaCuadrada)
+            // Asegurarse de que no haya más clientes que sillas
+            if (clientes.Count > CantSillas)
             {
-                cantSillas = 4;
-            }
-            else
-            {
-                cantSillas = 6;
+                clientes = clientes.Take(CantSillas).ToList(); // Tomar solo los primeros 'CantSillas' clientes
             }
 
-            for (int i = 0; i < cantSillas; i++)//agrega a la lista la cantidad de sillas por defecto 
+            // Actualizar los consumos según los clientes actuales
+            Consumos.Clear();
+            foreach (Cliente cliente in Clientes)
             {
-                sillas.Add(new Silla());
+                Consumos.AddRange(cliente.Consumos);
             }
         }
 
-        //Agregar silla
-        public void agregarSilla()
+        private void AgregarClientesAleatorios()
         {
-            if (MesaSimple && cantSillas < 6 || !MesaSimple && cantSillas < 8)
+            clientes.Clear();
+            for (int i = 0; i < CantSillas; i++)
             {
-                sillas.Add(new Silla());
-                cantSillas++;
+                clientes.Add(new Cliente());
             }
-            else
-            {
-                //Mensaje ya no sillas. Con un MessageShow
-            }
-        }
-        public void quitarSilla(Silla silla)
-        {
 
-            if (!silla.estado && cantSillas > 1)
-            {
-                cantSillas--;
-            }
-            else
-            {
-                //Mensaje ya no sillas.
-            }
-        }
-
-        public void OcuparSilla(Cliente cliente)
-        {
-            var sillaLibre = sillas.Find(s => !s.estado); //busca las sillas que estan desocupadas y la asigna al cliente
-            if (sillaLibre != null)
-            {
-                sillaLibre.estado = true;// true(ocupado), false(libre)
-                sillaLibre.ClienteActual = cliente; //se le asigna el cliente a la silla
-            }
-            else
-            {
-                Console.WriteLine("No hay sillas disponibles.");
-            }
-        }
-
-        public void DesocuparSilla(Silla silla)
-        {
-            if (this.estado == 'L')
-            {
-                foreach (Silla s in sillas)
-                {//para restablecer el estado de las sillas y los clientes
-                    s.estado = false;
-                    s.ClienteActual = null;
-                }
-            }
+            ActualizarConsumos();
         }
 
     }
@@ -136,19 +128,38 @@ namespace Resto.NET_TPI
 
     public class Silla : ElementoRestaurante
     {
-        public bool estado { get; set; } //true ocupada, false libre  
-        public bool barra { get; set; } //si es de  barra o no
+        private Cliente cliente;
 
-        public Cliente ClienteActual { get; set; }
-
-
+        public Cliente Cliente
+        {
+            get { return cliente; }
+            set
+            {
+                cliente = value;
+                Ocupado = cliente != null;
+                // Actualizar Consumos si hay cliente asignado
+                if (cliente != null)
+                {
+                    Consumos.Clear();
+                    Consumos.AddRange(cliente.Consumos);
+                }
+                else
+                {
+                    Consumos.Clear();
+                }
+            }
+        }
 
         public Silla()
         {
             esFija = false;
-            this.estado = false;
-            this.ClienteActual = null;
-            this.barra = false;
+            this.Cliente = null;
+            this.Ocupado = false;
+        }
+
+        public void GenerarClienteAleatorio()
+        {
+            this.Cliente = new Cliente();
         }
     }
 
@@ -178,38 +189,40 @@ namespace Resto.NET_TPI
         }
     }
 
-    public class Pared : ElementoRestaurante
-    {
-        public Pared()
-        {
-
-        }
-    }
-
-    public class Ambientes : ElementoRestaurante//baño, cocina,etc
-    {
-        public string tipo;
-
-        public Ambientes(string tipo)
-
-        {
-            this.tipo = tipo;
-
-        }
-    }
 
     public class Cliente
     {
+        private static int contadoCliente = 1;
+
         public string Nombre { get; set; }
         public TimeSpan Permanencia { get; set; }
         public List<Consumo> Consumos { get; set; }
-        public Mesa Mesa;//le asignamos un nro de mesa
+
 
 
         public Cliente()
         {
+            Nombre = $"Cliente{contadoCliente++}";
             this.Permanencia = new TimeSpan();//Arranca desde cero
-            Consumos = new List<Consumo>();
+            Consumos = GenerarConsumosAleatorios();
+        }
+
+        private List<Consumo> GenerarConsumosAleatorios()
+        {
+            var consumos = new List<Consumo>();
+            var random = new Random();
+            int numConsumos = random.Next(1, 5);
+
+            for (int i = 0; i < numConsumos; i++)
+            {
+                consumos.Add(new Consumo
+                {
+                    Producto = $"Producto{random.Next(1, 10)}",
+                    Precio = Math.Round((decimal)(random.NextDouble() * 100), 2)
+                });
+            }
+
+            return consumos;
         }
 
     }
@@ -218,30 +231,12 @@ namespace Resto.NET_TPI
     {
         public string Producto { get; set; }
         public decimal Precio { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Producto} Precio: ${Precio:F2}";
+        }
     }
-
-
-    /*public class Mozo
-    {
-        public int MesasACargo { get; set; }
-        public List<Mesa> mesas { get; set; }
-        public string Nombre { get; set; }
-
-
-        public Mozo()
-        {
-            mesas = new List<Mesa>();
-            MesasACargo = 0;
-        }
-
-    public void asignarMesa(Mesa mesa)
-        {
-            mesas.Add(mesa);
-            MesasACargo++;
-        }
-
-
-    }*/
 
     public static class ControlExtensions 
     {

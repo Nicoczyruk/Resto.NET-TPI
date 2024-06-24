@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             archivoToolStripMenuItem = new ToolStripMenuItem();
             guardarPlanoToolStripMenuItem = new ToolStripMenuItem();
@@ -68,6 +69,7 @@
             propertyGrid1 = new PropertyGrid();
             miGrilla = new MiGrilla();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
             panelHerramientas.SuspendLayout();
             panel2.SuspendLayout();
@@ -579,6 +581,11 @@
             miGrilla.Size = new Size(1185, 718);
             miGrilla.TabIndex = 1;
             // 
+            // timer1
+            // 
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -653,5 +660,6 @@
         private Panel panelMesa8;
         private Button btnRec8;
         private Button btnCir8;
+        private System.Windows.Forms.Timer timer1;
     }
 }
