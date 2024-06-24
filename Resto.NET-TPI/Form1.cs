@@ -317,7 +317,7 @@ namespace Resto.NET_TPI
             pictureBox.Size = new Size(100, 100);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;//Establece SizeMode a StretchImage para ajustar la imagen
             pictureBox.Tag = elementoRestaurante;
-
+            elementoRestaurante.Posicion = pictureBox.Location;
 
             pictureBoxToElemento.Add(pictureBox, elementoRestaurante);
 
@@ -363,7 +363,12 @@ namespace Resto.NET_TPI
                 {
                     panelDiseño.Controls.Remove(lbl);
                     lbl.Dispose(); // Liberar recursos del Label eliminado
+                    if(pictureBoxToElemento.ContainsKey(pictureBox))
+                    {
+                        pictureBoxToElemento.Remove(pictureBox);
+                    }
                     break; // Salir del bucle una vez encontrado y eliminado el Label
+                    
                 }
             }
         }
@@ -418,6 +423,10 @@ namespace Resto.NET_TPI
                 }
             }
 
+            if (pictureBoxToElemento.TryGetValue(arrastreImagen, out ElementoRestaurante elemento))
+            {
+                elemento.Posicion = arrastreImagen.Location;
+            }
             // Cuando se suelta el botón del mouse, se restablece el PictureBox que se está arrastrando
             arrastreImagen = null;
 
@@ -460,6 +469,10 @@ namespace Resto.NET_TPI
 
                 arrastreImagen.Location = nuevaUbicacion;
 
+                if (pictureBoxToElemento.TryGetValue(arrastreImagen, out ElementoRestaurante elemento))
+                {
+                    elemento.Posicion = nuevaUbicacion;
+                }
 
                 panelDiseño.Refresh(); //refresca el panel forzando el redibujado de todo el panel y sus controles.
 
@@ -486,6 +499,7 @@ namespace Resto.NET_TPI
                             return;
                         }
                         // Mostrar el objeto asociado a la PictureBox en el PropertyGrid
+
                         propertyGrid1.SelectedObject = pictureBoxToElemento[pictureBox];
 
                         // Hacer visible el PropertyGrid
