@@ -1,5 +1,6 @@
 using Resto.NET_TPI.Properties;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
@@ -15,8 +16,6 @@ namespace Resto.NET_TPI
         private int contadorMesa = 0;
         private Point ultimaPosicion;
 
-
-
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +27,7 @@ namespace Resto.NET_TPI
 
             panelDiseño.EnableDoubleBuffering(); //Tecnica de renderizado secundario  [] -> muestra picture box
             miGrilla.EnableDoubleBuffering();
+
 
 
             //Agregar manejador de eventos para el panelDiseño
@@ -55,6 +55,11 @@ namespace Resto.NET_TPI
 
         private void ActualizarElementoInterfaz(PictureBox pictureBox, ElementoRestaurante elemento)
         {
+            if (pictureBox.Tag is Divisor)
+            {
+                return;
+            }
+
             Label infoLabel = null;
 
             // Verificar si el PictureBox ya tiene un Label asociado
@@ -77,11 +82,95 @@ namespace Resto.NET_TPI
             }
 
             // Actualizar el texto del Label
-            string numero = elemento.Numero.ToString() ?? "N/A"; //null-coalescing operator -> sirve para proporcionar un valor "por defecto" en caso de la que la expresion a la izq
-                                                                 //sea null
-            string ocupadoTexto = elemento.Ocupado ? "Sí" : "No";
-            string MozoAsignado = elemento.Mozo.ToString();
-            infoLabel.Text = $"Nro: {numero}\nOcupado: {ocupadoTexto}\nConsumo: ${45}\nMozo: {MozoAsignado}";
+            string numero = elemento.Numero == 0 ? "No asignado" : elemento.Numero.ToString();
+
+            string ocupadoTexto = elemento.Ocupado ? "Ocupada" : "Disponible";
+
+            string reservadoTexto = elemento.Reservado ? "Reservada" : "No reservada";
+
+            string mozoAsignado = elemento.Mozo == 0 ? "No asignado" : elemento.Mozo.ToString();
+
+            decimal totalConsumo = 0;
+
+            string clientes = "";
+
+            if (elemento is Mesa mesa)
+            {
+                if (elemento.Consumos.Count > 0)
+                {
+                    totalConsumo = elemento.Consumos.Sum(consumo => consumo.Precio);
+                }
+                clientes = mesa.Clientes.Count == 0 ? "Sin clientes" : mesa.Clientes.Count.ToString();
+                mesa.ActualizarConsumos();
+
+                // Actualización de estados de reserva y ocupación
+                if (mesa.Reservado)
+                {
+                    mesa.Ocupado = false;
+                    mesa.Clientes.Clear();
+                    mesa.Consumos.Clear();
+                    infoLabel.Text = $"#{numero}\nEstado: {reservadoTexto}";
+                }
+                else if (mesa.Clientes.Count > 0)
+                {
+                    mesa.Ocupado = true;
+                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nClientes: {clientes}\nConsumo: ${totalConsumo:F2}";
+                }
+                else
+                {
+                    mesa.Ocupado = false;
+                    mesa.Clientes.Clear();
+                    mesa.Consumos.Clear();
+                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}";
+                }
+            }
+
+            if (elemento is Silla silla)
+            {
+                //Controla la logica dependiendo de lo que tenga el propertygrid
+                if (silla.Ocupado && silla.Cliente == null)
+                {
+                    silla.Cliente = new Cliente();
+                }
+                else if (silla.Ocupado == false)
+                {
+                    silla.Cliente = null;
+                }
+
+                //Añade el consumo del cliente a la silla.Consumos
+                if (silla.Consumos != null && silla.Cliente != null)
+                {
+                    silla.Consumos.Clear();
+                    silla.Consumos.AddRange(silla.Cliente.Consumos);
+
+                    totalConsumo = silla.Consumos.Sum(consumo => consumo.Precio);
+
+                }
+
+
+
+                //formateo de datos para mostrar en el label
+                string consumosTexto = totalConsumo == 0 ? "Sin consumos" : $"Consumos: ${totalConsumo:F2}";
+                string cliente = (silla.Cliente == null) ? "Sin cliente" : "1";
+                if (silla.Reservado)
+                {
+                    silla.Ocupado = false;
+                    infoLabel.Text = $"#{numero}\nEstado: {reservadoTexto}";
+
+                }
+                else if (silla.Ocupado)
+                {
+                    silla.Reservado = false;
+                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nCliente: {cliente}\n{consumosTexto:F2}";
+
+                }
+                else
+                {
+                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}";
+                }
+
+
+            }
 
             // Posicionar el Label sobre el PictureBox
             infoLabel.Location = new Point(pictureBox.Left, pictureBox.Top - infoLabel.Height);
@@ -166,6 +255,7 @@ namespace Resto.NET_TPI
             panelHerramientas.Visible = false;
             ActualizarVisibilidadLabels();
             ActualizarEstadoEliminarItem();
+            timer1.Start();
         }
         private void modoEdiciónToolStripMenuItem_Click_1(object sender, EventArgs e) //Modo Edicion
         {
@@ -175,6 +265,7 @@ namespace Resto.NET_TPI
             panelHerramientas.Visible = true;
             ActualizarVisibilidadLabels();
             ActualizarEstadoEliminarItem();
+            timer1.Stop();
         }
 
         //En cada botón de los paneles de la barra de Herram llamamos al método para que sea visible
@@ -225,70 +316,61 @@ namespace Resto.NET_TPI
             pictureBox.Image = nombre;
             pictureBox.Size = new Size(100, 100);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;//Establece SizeMode a StretchImage para ajustar la imagen
+            pictureBox.Tag = elementoRestaurante;
 
-            Point posicion;
-            Random random = new Random();
-            bool hayPosicionDisponible = false; //Variable que me indica que hay una posición disponible para crear mesa/silla
-            int maxIntentos = 1000; //La cantidad de veces que intenta encontrar una posición
-            int intentos = 0;
-            //Agregar cada PictureBox creado al control del contenedor panelDiseño
-            panelDiseño.Controls.Add(pictureBox);
-            pictureBox.BringToFront();
 
             pictureBoxToElemento.Add(pictureBox, elementoRestaurante);
 
 
-            while (intentos < maxIntentos)
-            {
-                posicion = new Point(random.Next(panelDiseño.Width - pictureBox.Size.Width), random.Next(panelDiseño.Height - pictureBox.Size.Height));
+            //Agregar los manejadores de eventos de arrastre
+            pictureBox.MouseDown += PictureBox_MouseDown;
+            pictureBox.MouseMove += PictureBox_MouseMove;
+            pictureBox.MouseUp += PictureBox_MouseUp;
+            pictureBox.MouseClick += PictureBox_MouseClick;
 
-                if (!HayColision(posicion, pictureBox.Size, null))
+            panelDiseño.Controls.Add(pictureBox); //Agregar cada PictureBox creado al control del contenedor panelDiseño
+            pictureBox.BringToFront();
+            ActualizarElementoInterfaz(pictureBox, elementoRestaurante);
+            ActualizarVisibilidadLabels();
+
+            ContextMenuStrip contextMenu = new ContextMenuStrip();
+            ToolStripMenuItem eliminarItem = new ToolStripMenuItem("Eliminar");
+
+            eliminarItem.Click += (s, e) =>
+            {
+
+                panelDiseño.Controls.Remove(pictureBox);
+                paneles.Remove(pictureBox);
+                EliminarLabelAsociado(pictureBox);
+            };
+
+
+
+            contextMenu.Items.Add(eliminarItem);
+            pictureBox.ContextMenuStrip = contextMenu;
+
+            paneles.Add(pictureBox);//se agrega a la lista por si se necesita eliminar
+
+
+        }
+
+        private void EliminarLabelAsociado(PictureBox pictureBox)
+        {
+            // Buscar y eliminar el Label asociado al PictureBox
+            foreach (Control control in panelDiseño.Controls)
+            {
+                if (control is Label lbl && lbl.Tag == pictureBox)
                 {
-                    hayPosicionDisponible = true;
-                    pictureBox.Location = posicion;
-                    break;
+                    panelDiseño.Controls.Remove(lbl);
+                    lbl.Dispose(); // Liberar recursos del Label eliminado
+                    break; // Salir del bucle una vez encontrado y eliminado el Label
                 }
-                intentos++;
             }
-
-            if (!hayPosicionDisponible)
-            {
-                MessageBox.Show("No hay más lugar para agregar.");
-            }
-            else
-            {
-                //Agregar los manejadores de eventos de arrastre
-                pictureBox.MouseDown += PictureBox_MouseDown;
-                pictureBox.MouseMove += PictureBox_MouseMove;
-                pictureBox.MouseUp += PictureBox_MouseUp;
-
-                panelDiseño.Controls.Add(pictureBox); //Agregar cada PictureBox creado al control del contenedor panelDiseño
-                pictureBox.BringToFront();
-                ActualizarElementoInterfaz(pictureBox, elementoRestaurante);
-                ActualizarVisibilidadLabels();
-                ContextMenuStrip contextMenu = new ContextMenuStrip();
-                ToolStripMenuItem eliminarItem = new ToolStripMenuItem("Eliminar");
-
-                eliminarItem.Click += (s, e) =>
-                {
-
-                    panelDiseño.Controls.Remove(pictureBox);
-                    paneles.Remove(pictureBox);
-                };
-
-
-
-                contextMenu.Items.Add(eliminarItem);
-                pictureBox.ContextMenuStrip = contextMenu;
-                //cantidadImagen++; (VER SI ES NECESARIO para el modo PreVisualización)
-                paneles.Add(pictureBox);//se agrega a la lista por si se necesita eliminar
-            }
-
         }
 
         private void ActualizarEstadoEliminarItem()
         {
-            foreach(PictureBox pictureBox in paneles)
+            foreach (PictureBox pictureBox in paneles)
             {
 
                 ToolStripMenuItem eliminar = (ToolStripMenuItem)pictureBox.ContextMenuStrip.Items[0];
@@ -306,10 +388,16 @@ namespace Resto.NET_TPI
                 arrastreImagen = sender as PictureBox;
                 coordenadasImagen = e.Location;
                 ultimaPosicion = arrastreImagen.Location;
+
+                if (arrastreImagen.Tag is Divisor) //Si es un divisor, no muestra el panel de propiedades
+                {
+                    return;
+                }
             }
 
             if (arrastreImagen != null && esModoPrevisualizacion && e.Button == MouseButtons.Left)
             {
+
                 // Mostrar el PropertyGrid y seleccionar el objeto asociado al PictureBox
                 propertyGrid1.SelectedObject = pictureBoxToElemento[arrastreImagen];
                 propertyGrid1.Visible = true;
@@ -338,7 +426,7 @@ namespace Resto.NET_TPI
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (esModoPrevisualizacion) 
+            if (esModoPrevisualizacion)
             {
                 return;
             }
@@ -367,7 +455,7 @@ namespace Resto.NET_TPI
                 else if (y + arrastreImagen.Height > miGrilla.Height)
                     y = miGrilla.Height - arrastreImagen.Height;
 
-               
+
                 Point nuevaUbicacion = new Point(x, y);
 
                 arrastreImagen.Location = nuevaUbicacion;
@@ -393,6 +481,10 @@ namespace Resto.NET_TPI
                     // Verificar si estamos en modo previsualización
                     if (esModoPrevisualizacion)
                     {
+                        if (pictureBox.Tag is Divisor) //Si es un divisor, no muestra el panel de propiedades
+                        {
+                            return;
+                        }
                         // Mostrar el objeto asociado a la PictureBox en el PropertyGrid
                         propertyGrid1.SelectedObject = pictureBoxToElemento[pictureBox];
 
@@ -411,57 +503,49 @@ namespace Resto.NET_TPI
         private void bntCircular2_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 2;
-            mesa.MesaCuadrada = false;
+            mesa.CantSillas = 2;
             CargarImagenMesa(Resources.mesaParaDosCircu, mesa);
         }
         private void btnRec2_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 2;
-            mesa.MesaCuadrada = true;
+            mesa.CantSillas = 2;
             CargarImagenMesa(Resources.mesaParaDosRectang, mesa);
         }
         private void bntCir4_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 4;
-            mesa.MesaCuadrada = false;
+            mesa.CantSillas = 4;
             CargarImagenMesa(Resources.mesaParaCuatroCircu, mesa);
         }
         private void btnRec4_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 4;
-            mesa.MesaCuadrada = true;
+            mesa.CantSillas = 4;
             CargarImagenMesa(Resources.mesaParaCuatroRectang, mesa);
         }
         private void btnCir6_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 6;
-            mesa.MesaCuadrada = false;
+            mesa.CantSillas = 6;
             CargarImagenMesa(Resources.mesaParaSeisCircu, mesa);
         }
         private void btnRec6_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 6;
-            mesa.MesaCuadrada = true;
+            mesa.CantSillas = 6;
             CargarImagenMesa(Resources.mesaParaSeisRectang, mesa);
         }
         private void btnCir8_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 8;
-            mesa.MesaCuadrada = false;
+            mesa.CantSillas = 8;
             CargarImagenMesa(Resources.mesaParaOchoCircu, mesa);
         }
         private void btnRec8_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
-            mesa.cantSillas = 8;
-            mesa.MesaCuadrada = true;
+            mesa.CantSillas = 8;
             CargarImagenMesa(Resources.mesaParaOchoRectang, mesa);
         }
         private void bntHorizontal_Click_1(object sender, EventArgs e)
@@ -541,14 +625,126 @@ namespace Resto.NET_TPI
                     return true;
                 }
             }
-
-
-
-
-
             // Si no se detecta ninguna colisión después de verificar todos los PictureBox, retorna false
             return false;
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            foreach (Control control in panelDiseño.Controls)
+            {
+                if (control is PictureBox pictureBox && pictureBox.Tag is ElementoRestaurante elemento)
+                {
+                    // Verificar si el PictureBox tiene un Label asociado
+                    Label infoLabel = null;
+                    foreach (Control innerControl in panelDiseño.Controls)
+                    {
+                        if (innerControl is Label label && label.Tag == pictureBox)
+                        {
+                            infoLabel = label;
+                            break;
+                        }
+                    }
+
+                    // Si se encuentra el Label asociado, actualizar su contenido
+                    if (infoLabel != null)
+                    {
+                        // Actualizar el texto del Label
+                        string numero = elemento.Numero == 0 ? "No asignado" : elemento.Numero.ToString();
+
+                        string ocupadoTexto = elemento.Ocupado ? "Ocupada" : "Disponible";
+
+                        string reservadoTexto = elemento.Reservado ? "Reservada" : "No reservada";
+
+                        string mozoAsignado = elemento.Mozo == 0 ? "No asignado" : elemento.Mozo.ToString();
+
+                        decimal totalConsumo = 0;
+
+                        string clientes = "";
+
+                        if (elemento is Mesa mesa)
+                        {
+                            if (elemento.Consumos.Count > 0)
+                            {
+                                totalConsumo = elemento.Consumos.Sum(consumo => consumo.Precio);
+                            }
+                            clientes = mesa.Clientes.Count == 0 ? "Sin clientes" : mesa.Clientes.Count.ToString();
+                            mesa.ActualizarConsumos();
+
+                            // Actualización de estados de reserva y ocupación
+                            if (mesa.Reservado)
+                            {
+                                mesa.Ocupado = false;
+                                mesa.Clientes.Clear();
+                                mesa.Consumos.Clear();
+                                infoLabel.Text = $"#{numero}\nEstado: {reservadoTexto}";
+                            }
+                            else if (mesa.Clientes.Count > 0)
+                            {
+                                mesa.Ocupado = true;
+                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nClientes: {clientes}\nConsumo: ${totalConsumo:F2}";
+                            }
+                            else
+                            {
+                                mesa.Ocupado = false;
+                                mesa.Clientes.Clear();
+                                mesa.Consumos.Clear();
+                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}";
+                            }
+                        }
+
+                        if (elemento is Silla silla)
+                        {
+                            //Controla la logica dependiendo de lo que tenga el propertygrid
+                            if (silla.Ocupado && silla.Cliente == null)
+                            {
+                                silla.Cliente = new Cliente();
+                            }
+                            else if (silla.Ocupado == false)
+                            {
+                                silla.Cliente = null;
+                            }
+
+                            //Añade el consumo del cliente a la silla.Consumos
+                            if (silla.Consumos != null && silla.Cliente != null)
+                            {
+                                silla.Consumos.Clear();
+                                silla.Consumos.AddRange(silla.Cliente.Consumos);
+
+                                totalConsumo = silla.Consumos.Sum(consumo => consumo.Precio);
+
+                            }
+
+
+
+                            //formateo de datos para mostrar en el label
+                            string consumosTexto = totalConsumo == 0 ? "Sin consumos" : $"Consumos: ${totalConsumo:F2}";
+                            string cliente = (silla.Cliente == null) ? "Sin cliente" : "1";
+                            if (silla.Reservado)
+                            {
+                                silla.Ocupado = false;
+                                infoLabel.Text = $"#{numero}\nEstado: {reservadoTexto}";
+
+                            }
+                            else if (silla.Ocupado)
+                            {
+                                silla.Reservado = false;
+                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nCliente: {cliente}\n{consumosTexto:F2}";
+
+                            }
+                            else
+                            {
+                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}";
+                            }
+
+                            // Posicionar el Label sobre el PictureBox
+                            infoLabel.Location = new Point(pictureBox.Left, pictureBox.Top - infoLabel.Height);
+                            infoLabel.BringToFront();
+                            infoLabel.Visible = esModoPrevisualizacion;  // Mostrar solo en modo previsualización
+                        }
+                    }
+                }
+            }
+        }
     }
 }
