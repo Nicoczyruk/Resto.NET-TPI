@@ -828,7 +828,7 @@ namespace Resto.NET_TPI
             panelDiseño.Controls.Add(miGrilla);
             esModoPrevisualizacion = true;
             miGrilla.Visible = false;
-            panelHerramientas.Visible = false;
+            panelHerramientas.Enabled = false;
             ActualizarVisibilidadLabels();
             ActualizarEstadoEliminarItem();
             timer1.Start();
