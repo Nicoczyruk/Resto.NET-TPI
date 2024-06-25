@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Diagnostics;
+using System.ComponentModel;
+using System.Globalization;
+using System.Drawing.Design;
+using System.Windows.Forms.Design;
 
 namespace Resto.NET_TPI
 {
@@ -23,12 +28,18 @@ namespace Resto.NET_TPI
     {
         public Point Posicion { get; set; }
         public int Numero { get; set; } // Número de mesa/silla
+        [TypeConverter(typeof(SiNoConverter))]
         public bool Ocupado { get; set; }
+        [TypeConverter(typeof(SiNoConverter))]
         public bool Reservado { get; set; }
         public List<Consumo> Consumos { get; set; }
+        [Browsable(false)]
+        public Stopwatch RelojPermanencia { get; set; }
+        [Browsable(false)]
         public TimeSpan Permanencia { get; set; }
         public int Mozo { get; set; }
         public bool esFija;
+        [Browsable(false)]
         public String nameImg { get; set; }
 
 
@@ -45,6 +56,7 @@ namespace Resto.NET_TPI
         public ElementoRestaurante()
         {
             Consumos = new List<Consumo>();
+            RelojPermanencia = new Stopwatch();
         }
     }
     [Serializable]
@@ -245,6 +257,43 @@ namespace Resto.NET_TPI
         public override string ToString()
         {
             return $"{Producto} Precio: ${Precio:F2}";
+        }
+    }
+
+    public class SiNoConverter : BooleanConverter
+    {
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (value is bool boolValue)
+            {
+                return boolValue ? "Si" : "No";
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            string strValue = value as string;
+            if (strValue != null)
+            {
+                return strValue.ToLower() == "si";
+            }
+            return base.ConvertFrom(context, culture, value);
+        }
+
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            return new StandardValuesCollection(new string[] { "Si", "No" });
+        }
+
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return true;
         }
     }
 
