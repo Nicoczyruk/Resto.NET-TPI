@@ -69,6 +69,10 @@
             panelDiseño = new Panel();
             propertyGrid1 = new PropertyGrid();
             miGrilla = new MiGrilla();
+            panelEntrada = new Panel();
+            panelBarra = new Panel();
+            panelCocina = new Panel();
+            panelBaño = new Panel();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
@@ -82,6 +86,7 @@
             panelMesa2.SuspendLayout();
             panel1.SuspendLayout();
             panelDiseño.SuspendLayout();
+            miGrilla.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -572,9 +577,9 @@
             // propertyGrid1
             // 
             propertyGrid1.Dock = DockStyle.Right;
-            propertyGrid1.Location = new Point(784, 0);
+            propertyGrid1.Location = new Point(798, 0);
             propertyGrid1.Name = "propertyGrid1";
-            propertyGrid1.Size = new Size(200, 737);
+            propertyGrid1.Size = new Size(186, 737);
             propertyGrid1.TabIndex = 0;
             propertyGrid1.Visible = false;
             // 
@@ -582,11 +587,43 @@
             // 
             miGrilla.BackColor = Color.Transparent;
             miGrilla.BackgroundImage = Properties.Resources.bar;
+            miGrilla.Controls.Add(panelEntrada);
+            miGrilla.Controls.Add(panelBarra);
+            miGrilla.Controls.Add(panelCocina);
+            miGrilla.Controls.Add(panelBaño);
             miGrilla.Dock = DockStyle.Fill;
             miGrilla.Location = new Point(0, 0);
             miGrilla.Name = "miGrilla";
             miGrilla.Size = new Size(984, 737);
             miGrilla.TabIndex = 1;
+            // 
+            // panelEntrada
+            // 
+            panelEntrada.Location = new Point(834, 602);
+            panelEntrada.Name = "panelEntrada";
+            panelEntrada.Size = new Size(138, 113);
+            panelEntrada.TabIndex = 3;
+            // 
+            // panelBarra
+            // 
+            panelBarra.Location = new Point(0, 615);
+            panelBarra.Name = "panelBarra";
+            panelBarra.Size = new Size(449, 100);
+            panelBarra.TabIndex = 2;
+            // 
+            // panelCocina
+            // 
+            panelCocina.Location = new Point(747, 0);
+            panelCocina.Name = "panelCocina";
+            panelCocina.Size = new Size(234, 385);
+            panelCocina.TabIndex = 1;
+            // 
+            // panelBaño
+            // 
+            panelBaño.Location = new Point(0, 3);
+            panelBaño.Name = "panelBaño";
+            panelBaño.Size = new Size(286, 232);
+            panelBaño.TabIndex = 0;
             // 
             // timer1
             // 
@@ -621,6 +658,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panelDiseño.ResumeLayout(false);
+            miGrilla.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -669,5 +707,9 @@
         private System.Windows.Forms.Timer timer1;
         private ToolStripMenuItem nuevoPlanoToolStripMenuItem;
         private ToolStripMenuItem salirToolStripMenuItem;
+        private Panel panelCocina;
+        private Panel panelBaño;
+        private Panel panelBarra;
+        private Panel panelEntrada;
     }
 }

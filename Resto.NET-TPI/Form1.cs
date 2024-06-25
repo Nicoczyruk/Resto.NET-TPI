@@ -18,6 +18,7 @@ namespace Resto.NET_TPI
         private bool esModoPrevisualizacion = false;
         private int contadorMesa = 0;
         private Point ultimaPosicion;
+        private List<Rectangle> areasRestringidas = new List<Rectangle>();
 
         public Form1()
         {
@@ -49,6 +50,16 @@ namespace Resto.NET_TPI
             miGrilla.Visible = false;
             panelHerramientas.Enabled = false;
             ActualizarVisibilidadLabels();
+
+            panelDiseño.Controls.Add(panelBaño);
+            panelDiseño.Controls.Add(panelBarra);
+            panelDiseño.Controls.Add(panelCocina);
+            panelDiseño.Controls.Add(panelEntrada);
+
+            areasRestringidas.Add(new Rectangle(panelBaño.Location, panelBaño.Size));
+            areasRestringidas.Add(new Rectangle(panelBarra.Location, panelBarra.Size));
+            areasRestringidas.Add(new Rectangle(panelCocina.Location, panelCocina.Size));
+            areasRestringidas.Add(new Rectangle(panelEntrada.Location, panelEntrada.Size));
         }
         private void VisibilidadInicial()
         {
@@ -658,6 +669,14 @@ namespace Resto.NET_TPI
                 if (rect.IntersectsWith(exRect))
                 {
                     // Si hay una intersección, retorna true indicando una colisión.
+                    return true;
+                }
+            }
+
+            foreach (Rectangle areaRestringida in areasRestringidas)
+            {
+                if (rect.IntersectsWith(areaRestringida))
+                {
                     return true;
                 }
             }

@@ -1,18 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\",
+  "WorkspaceRootPath": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\resto.net-tpi\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|c:\\users\\nicoc\\source\\repos\\resto.net-tpi\\resto.net-tpi\\resto.net-tpi\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|solutionrelative:resto.net-tpi\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\resto.net-tpi\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\resto.net-tpi\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|solutionrelative:resto.net-tpi\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|c:\\users\\nicoc\\source\\repos\\resto.net-tpi\\resto.net-tpi\\clases.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2529FD-1DBA-46A1-AFC5-4170A28B89A9}|Resto.NET-TPI\\Resto.NET-TPI.csproj|solutionrelative:resto.net-tpi\\clases.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,30 +18,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Clases.cs",
-              "DocumentMoniker": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Clases.cs",
-              "RelativeDocumentMoniker": "Resto.NET-TPI\\Clases.cs",
-              "ToolTip": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Clases.cs",
-              "RelativeToolTip": "Resto.NET-TPI\\Clases.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEoAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T17:51:01.172Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs",
               "RelativeDocumentMoniker": "Resto.NET-TPI\\Form1.cs",
-              "ToolTip": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs",
+              "ToolTip": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs",
               "RelativeToolTip": "Resto.NET-TPI\\Form1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFsBAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-15T15:53:26.573Z",
               "EditorCaption": ""
@@ -54,13 +37,12 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs",
               "RelativeDocumentMoniker": "Resto.NET-TPI\\Form1.cs",
-              "ToolTip": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\nicoc\\source\\repos\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI\\Form1.cs [Design]",
               "RelativeToolTip": "Resto.NET-TPI\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T15:51:19.702Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-06-15T15:51:19.702Z"
             }
           ]
         }
