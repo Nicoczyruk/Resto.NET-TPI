@@ -69,6 +69,12 @@
             panelDiseño = new Panel();
             propertyGrid1 = new PropertyGrid();
             miGrilla = new MiGrilla();
+            panelEntrada = new Panel();
+            panelCocina = new Panel();
+            panelBarra = new Panel();
+            panel3 = new Panel();
+            panel4 = new Panel();
+            panelBaño = new Panel();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
@@ -82,6 +88,9 @@
             panelMesa2.SuspendLayout();
             panel1.SuspendLayout();
             panelDiseño.SuspendLayout();
+            miGrilla.SuspendLayout();
+            panelBarra.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -582,11 +591,67 @@
             // 
             miGrilla.BackColor = Color.Transparent;
             miGrilla.BackgroundImage = Properties.Resources.bar;
+            miGrilla.Controls.Add(panelEntrada);
+            miGrilla.Controls.Add(panelCocina);
+            miGrilla.Controls.Add(panelBarra);
+            miGrilla.Controls.Add(panelBaño);
             miGrilla.Dock = DockStyle.Fill;
             miGrilla.Location = new Point(0, 0);
             miGrilla.Name = "miGrilla";
             miGrilla.Size = new Size(984, 737);
             miGrilla.TabIndex = 1;
+            // 
+            // panelEntrada
+            // 
+            panelEntrada.BackColor = Color.Transparent;
+            panelEntrada.Location = new Point(828, 617);
+            panelEntrada.Name = "panelEntrada";
+            panelEntrada.Size = new Size(153, 120);
+            panelEntrada.TabIndex = 0;
+            panelEntrada.Visible = false;
+            // 
+            // panelCocina
+            // 
+            panelCocina.BackColor = Color.Transparent;
+            panelCocina.Location = new Point(746, 1);
+            panelCocina.Name = "panelCocina";
+            panelCocina.Size = new Size(238, 397);
+            panelCocina.TabIndex = 1;
+            panelCocina.Visible = false;
+            // 
+            // panelBarra
+            // 
+            panelBarra.BackColor = Color.Transparent;
+            panelBarra.Controls.Add(panel3);
+            panelBarra.Location = new Point(0, 671);
+            panelBarra.Name = "panelBarra";
+            panelBarra.Size = new Size(453, 65);
+            panelBarra.TabIndex = 0;
+            panelBarra.Visible = false;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(panel4);
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(200, 100);
+            panel3.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(200, 100);
+            panel4.TabIndex = 0;
+            // 
+            // panelBaño
+            // 
+            panelBaño.BackColor = Color.Transparent;
+            panelBaño.Location = new Point(0, 0);
+            panelBaño.Name = "panelBaño";
+            panelBaño.Size = new Size(289, 247);
+            panelBaño.TabIndex = 0;
+            panelBaño.Visible = false;
             // 
             // timer1
             // 
@@ -621,6 +686,9 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panelDiseño.ResumeLayout(false);
+            miGrilla.ResumeLayout(false);
+            panelBarra.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -669,5 +737,11 @@
         private System.Windows.Forms.Timer timer1;
         private ToolStripMenuItem nuevoPlanoToolStripMenuItem;
         private ToolStripMenuItem salirToolStripMenuItem;
+        private Panel panelBaño;
+        private Panel panelBarra;
+        private Panel panelCocina;
+        private Panel panel3;
+        private Panel panel4;
+        private Panel panelEntrada;
     }
 }
