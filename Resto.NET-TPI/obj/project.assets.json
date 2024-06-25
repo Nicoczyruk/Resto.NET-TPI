@@ -8,19 +8,19 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Gonza\\.nuget\\packages\\": {}
+    "C:\\Users\\54936\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
+      "projectUniqueName": "C:\\Users\\54936\\Downloads\\Resto.NET-TPI-master\\Resto.NET-TPI-master\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
       "projectName": "Resto.NET-TPI",
-      "projectPath": "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
-      "packagesPath": "C:\\Users\\Gonza\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gonza\\Desktop\\Resto.NET-TPI\\Resto.NET-TPI\\obj\\",
+      "projectPath": "C:\\Users\\54936\\Downloads\\Resto.NET-TPI-master\\Resto.NET-TPI-master\\Resto.NET-TPI\\Resto.NET-TPI.csproj",
+      "packagesPath": "C:\\Users\\54936\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\54936\\Downloads\\Resto.NET-TPI-master\\Resto.NET-TPI-master\\Resto.NET-TPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Gonza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\54936\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -69,7 +69,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
