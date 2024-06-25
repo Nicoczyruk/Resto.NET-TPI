@@ -1,7 +1,9 @@
 using Resto.NET_TPI.Properties;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Resto.NET_TPI
@@ -295,18 +297,21 @@ namespace Resto.NET_TPI
         }
 
         //Método para cargar la imagen y sus propiedades a los pictureBox y para asociar las imagenes a los botones
-        private void CargarImagenMesa(Image nombre, Mesa mesa)
+        private void CargarImagenMesa(Image nombre, Mesa mesa, String nameImg)
         {
+            mesa.nameImg = nameImg;
             CargarImagen(nombre, mesa);
         }
 
-        private void CargarImagenSilla(Image nombre, Silla silla)
+        private void CargarImagenSilla(Image nombre, Silla silla, String nameImg)
         {
+            silla.nameImg = nameImg;
             CargarImagen(nombre, silla);
         }
 
-        private void CargarImagenDivisor(Image nombre, Divisor divisor)
+        private void CargarImagenDivisor(Image nombre, Divisor divisor, String nameImg)
         {
+            divisor.nameImg = nameImg;
             CargarImagen(nombre, divisor);
         }
 
@@ -317,10 +322,10 @@ namespace Resto.NET_TPI
             pictureBox.Size = new Size(100, 100);
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;//Establece SizeMode a StretchImage para ajustar la imagen
             pictureBox.Tag = elementoRestaurante;
-            elementoRestaurante.Posicion = pictureBox.Location;
 
+            //elementoRestaurante.Posicion = pictureBox.Location;
             pictureBoxToElemento.Add(pictureBox, elementoRestaurante);
-
+            pictureBox.Location = pictureBoxToElemento[pictureBox].Posicion;
 
             //Agregar los manejadores de eventos de arrastre
             pictureBox.MouseDown += PictureBox_MouseDown;
@@ -363,12 +368,12 @@ namespace Resto.NET_TPI
                 {
                     panelDiseño.Controls.Remove(lbl);
                     lbl.Dispose(); // Liberar recursos del Label eliminado
-                    if(pictureBoxToElemento.ContainsKey(pictureBox))
+                    if (pictureBoxToElemento.ContainsKey(pictureBox))
                     {
                         pictureBoxToElemento.Remove(pictureBox);
                     }
                     break; // Salir del bucle una vez encontrado y eliminado el Label
-                    
+
                 }
             }
         }
@@ -518,64 +523,64 @@ namespace Resto.NET_TPI
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 2;
-            CargarImagenMesa(Resources.mesaParaDosCircu, mesa);
+            CargarImagenMesa(Resources.mesaParaDosCircu, mesa, "mesaParaDosCircu");
         }
         private void btnRec2_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 2;
-            CargarImagenMesa(Resources.mesaParaDosRectang, mesa);
+            CargarImagenMesa(Resources.mesaParaDosRectang, mesa, "mesaParaDosRectang");
         }
         private void bntCir4_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 4;
-            CargarImagenMesa(Resources.mesaParaCuatroCircu, mesa);
+            CargarImagenMesa(Resources.mesaParaCuatroCircu, mesa, "mesaParaCuatroCircu");
         }
         private void btnRec4_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 4;
-            CargarImagenMesa(Resources.mesaParaCuatroRectang, mesa);
+            CargarImagenMesa(Resources.mesaParaCuatroRectang, mesa, "mesaParaCuatroRectang");
         }
         private void btnCir6_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 6;
-            CargarImagenMesa(Resources.mesaParaSeisCircu, mesa);
+            CargarImagenMesa(Resources.mesaParaSeisCircu, mesa, "mesaParaSeisCircu");
         }
         private void btnRec6_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 6;
-            CargarImagenMesa(Resources.mesaParaSeisRectang, mesa);
+            CargarImagenMesa(Resources.mesaParaSeisRectang, mesa, "mesaParaSeisRectang");
         }
         private void btnCir8_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 8;
-            CargarImagenMesa(Resources.mesaParaOchoCircu, mesa);
+            CargarImagenMesa(Resources.mesaParaOchoCircu, mesa, "mesaParaOchoCircu");
         }
         private void btnRec8_Click(object sender, EventArgs e)
         {
             Mesa mesa = new Mesa();
             mesa.CantSillas = 8;
-            CargarImagenMesa(Resources.mesaParaOchoRectang, mesa);
+            CargarImagenMesa(Resources.mesaParaOchoRectang, mesa, "mesaParaOchoRectang");
         }
         private void bntHorizontal_Click_1(object sender, EventArgs e)
         {
             Divisor divisor = new Divisor();
-            CargarImagenDivisor(Resources.divisorHorizontal, divisor);
+            CargarImagenDivisor(Resources.divisorHorizontal, divisor, "divisorHorizontal");
         }
         private void btnVertical_Click_1(object sender, EventArgs e)
         {
             Divisor divisor = new Divisor();
-            CargarImagenDivisor(Resources.divisorVertical, divisor);
+            CargarImagenDivisor(Resources.divisorVertical, divisor, "divisorVertical");
         }
         private void btnSilla_Click_1(object sender, EventArgs e)
         {
             Silla silla = new Silla();
-            CargarImagenSilla(Resources.Banqueta, silla);
+            CargarImagenSilla(Resources.Banqueta, silla, "Banqueta");
         }
 
         //Para BORRAR la ultima accion
@@ -755,6 +760,76 @@ namespace Resto.NET_TPI
                             infoLabel.Location = new Point(pictureBox.Left, pictureBox.Top - infoLabel.Height);
                             infoLabel.BringToFront();
                             infoLabel.Visible = esModoPrevisualizacion;  // Mostrar solo en modo previsualización
+                        }
+                    }
+                }
+            }
+        }
+
+        private void guardarPlanoToolStripMenuItem_Click(object sender, EventArgs e)//MUDAR
+        {
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "XML Files (*.xml)|*.xml";
+            saveFileDialog1.RestoreDirectory = true;
+            Stream myStream;
+
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<ElementoRestaurante>));
+                    serializer.Serialize(myStream, pictureBoxToElemento.Values.ToList());
+                    myStream.Close();
+                }
+            }
+
+       
+
+
+        }
+
+        private void cargarPlanoToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (!esModoPrevisualizacion)
+            {
+                return;
+            }
+
+            pictureBoxToElemento.Clear();
+            paneles.Clear();
+            panelDiseño.Controls.Clear();
+
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+            List<ElementoRestaurante> elementos;
+            XmlSerializer serializer = new XmlSerializer(typeof(List<ElementoRestaurante>));
+
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "XML Files (*.xml)|*.xml";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = openFileDialog.FileName;
+
+                    var fileStream = openFileDialog.OpenFile();
+
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        if (fileStream.Length > 0)
+                        {
+                            elementos = (List<ElementoRestaurante>)serializer.Deserialize(reader);
+
+                            foreach (var elemento in elementos)
+                            {
+                                Image imagen = (Image)Resources.ResourceManager.GetObject(elemento.nameImg);
+                                CargarImagen(imagen, elemento);
+                            }
                         }
                     }
                 }

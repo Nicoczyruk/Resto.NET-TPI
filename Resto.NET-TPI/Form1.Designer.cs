@@ -90,7 +90,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { archivoToolStripMenuItem, vistaToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1385, 24);
+            menuStrip1.Size = new Size(1370, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -104,14 +104,16 @@
             // guardarPlanoToolStripMenuItem
             // 
             guardarPlanoToolStripMenuItem.Name = "guardarPlanoToolStripMenuItem";
-            guardarPlanoToolStripMenuItem.Size = new Size(149, 22);
+            guardarPlanoToolStripMenuItem.Size = new Size(180, 22);
             guardarPlanoToolStripMenuItem.Text = "Guardar plano";
+            guardarPlanoToolStripMenuItem.Click += guardarPlanoToolStripMenuItem_Click;
             // 
             // cargarPlanoToolStripMenuItem
             // 
             cargarPlanoToolStripMenuItem.Name = "cargarPlanoToolStripMenuItem";
-            cargarPlanoToolStripMenuItem.Size = new Size(149, 22);
+            cargarPlanoToolStripMenuItem.Size = new Size(180, 22);
             cargarPlanoToolStripMenuItem.Text = "Cargar plano";
+            cargarPlanoToolStripMenuItem.Click += cargarPlanoToolStripMenuItem_Click_1;
             // 
             // vistaToolStripMenuItem
             // 
@@ -138,9 +140,9 @@
             // 
             statusStrip1.BackColor = SystemColors.Control;
             statusStrip1.ImageScalingSize = new Size(24, 24);
-            statusStrip1.Location = new Point(0, 742);
+            statusStrip1.Location = new Point(0, 727);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1385, 22);
+            statusStrip1.Size = new Size(1370, 22);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -152,7 +154,7 @@
             panelHerramientas.Dock = DockStyle.Left;
             panelHerramientas.Location = new Point(0, 24);
             panelHerramientas.Name = "panelHerramientas";
-            panelHerramientas.Size = new Size(200, 718);
+            panelHerramientas.Size = new Size(200, 703);
             panelHerramientas.TabIndex = 2;
             // 
             // panel2
@@ -169,7 +171,7 @@
             panel2.Location = new Point(0, 36);
             panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(198, 680);
+            panel2.Size = new Size(198, 665);
             panel2.TabIndex = 1;
             // 
             // btnDeshacer
@@ -179,7 +181,7 @@
             btnDeshacer.Dock = DockStyle.Bottom;
             btnDeshacer.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDeshacer.ForeColor = SystemColors.ActiveCaptionText;
-            btnDeshacer.Location = new Point(0, 650);
+            btnDeshacer.Location = new Point(0, 635);
             btnDeshacer.Margin = new Padding(2);
             btnDeshacer.Name = "btnDeshacer";
             btnDeshacer.Size = new Size(198, 30);
@@ -197,7 +199,7 @@
             panelDivisor.Location = new Point(0, 425);
             panelDivisor.Margin = new Padding(2);
             panelDivisor.Name = "panelDivisor";
-            panelDivisor.Size = new Size(198, 255);
+            panelDivisor.Size = new Size(198, 240);
             panelDivisor.TabIndex = 4;
             // 
             // btnVertical
@@ -559,15 +561,15 @@
             panelDiseño.ForeColor = SystemColors.ControlText;
             panelDiseño.Location = new Point(200, 24);
             panelDiseño.Name = "panelDiseño";
-            panelDiseño.Size = new Size(1185, 718);
+            panelDiseño.Size = new Size(1170, 703);
             panelDiseño.TabIndex = 3;
             // 
             // propertyGrid1
             // 
             propertyGrid1.Dock = DockStyle.Right;
-            propertyGrid1.Location = new Point(985, 0);
+            propertyGrid1.Location = new Point(970, 0);
             propertyGrid1.Name = "propertyGrid1";
-            propertyGrid1.Size = new Size(200, 718);
+            propertyGrid1.Size = new Size(200, 703);
             propertyGrid1.TabIndex = 0;
             propertyGrid1.Visible = false;
             // 
@@ -578,7 +580,7 @@
             miGrilla.Dock = DockStyle.Fill;
             miGrilla.Location = new Point(0, 0);
             miGrilla.Name = "miGrilla";
-            miGrilla.Size = new Size(1185, 718);
+            miGrilla.Size = new Size(1170, 703);
             miGrilla.TabIndex = 1;
             // 
             // timer1
@@ -591,7 +593,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.bar;
-            ClientSize = new Size(1385, 764);
+            ClientSize = new Size(1370, 749);
             Controls.Add(panelDiseño);
             Controls.Add(panelHerramientas);
             Controls.Add(statusStrip1);

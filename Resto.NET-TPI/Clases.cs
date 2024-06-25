@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Resto.NET_TPI
 {
@@ -13,6 +14,11 @@ namespace Resto.NET_TPI
     {
     }
 
+
+    [XmlInclude(typeof(Mesa))]
+    [XmlInclude(typeof(Silla))]
+    [XmlInclude(typeof(Divisor))]
+    [XmlRoot("ElementoRestaurante")]
     public abstract class ElementoRestaurante
     {
         public Point Posicion { get; set; }
@@ -23,6 +29,8 @@ namespace Resto.NET_TPI
         public TimeSpan Permanencia { get; set; }
         public int Mozo { get; set; }
         public bool esFija;
+        public String nameImg { get; set; }
+
 
         public void Fix()
         {
@@ -39,7 +47,8 @@ namespace Resto.NET_TPI
             Consumos = new List<Consumo>();
         }
     }
-
+    [Serializable]
+    [XmlRoot("Mesa")]
     public class Mesa : ElementoRestaurante
     {
         private List<Cliente> clientes = new List<Cliente>();
@@ -125,10 +134,10 @@ namespace Resto.NET_TPI
 
     }
 
-
+    [XmlRoot("Silla")]
     public class Silla : ElementoRestaurante
     {
-        private Cliente cliente;
+        public Cliente cliente;
 
         public Cliente Cliente
         {
@@ -153,7 +162,6 @@ namespace Resto.NET_TPI
         public Silla()
         {
             esFija = false;
-            this.Cliente = null;
             this.Ocupado = false;
         }
 
@@ -180,6 +188,7 @@ namespace Resto.NET_TPI
         }
     }
 
+    [XmlRoot("Divisor")]
     public class Divisor : ElementoRestaurante
     {
 
@@ -189,7 +198,7 @@ namespace Resto.NET_TPI
         }
     }
 
-
+    [XmlRoot("Cliente")]
     public class Cliente
     {
         private static int contadoCliente = 1;
@@ -227,6 +236,7 @@ namespace Resto.NET_TPI
 
     }
 
+    [XmlRoot("Consumo")]
     public class Consumo
     {
         public string Producto { get; set; }
