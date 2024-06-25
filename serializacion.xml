@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfElementoRestaurante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ElementoRestaurante xsi:type="Silla">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>5</X>
+      <Y>585</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>Banqueta</nameImg>
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Silla">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>134</X>
+      <Y>586</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>Banqueta</nameImg>
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Silla">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>265</X>
+      <Y>586</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>Banqueta</nameImg>
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>22</X>
+      <Y>255</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaDosCircu</nameImg>
+    <CantSillas>2</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>221</X>
+      <Y>251</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaDosRectang</nameImg>
+    <CantSillas>2</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>16</X>
+      <Y>428</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaCuatroRectang</nameImg>
+    <CantSillas>4</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>227</X>
+      <Y>417</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaCuatroCircu</nameImg>
+    <CantSillas>4</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>515</X>
+      <Y>261</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaSeisCircu</nameImg>
+    <CantSillas>6</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>513</X>
+      <Y>9</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaOchoRectang</nameImg>
+    <CantSillas>8</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>511</X>
+      <Y>138</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaOchoCircu</nameImg>
+    <CantSillas>8</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Mesa">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>512</X>
+      <Y>400</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>mesaParaSeisRectang</nameImg>
+    <CantSillas>6</CantSillas>
+    <Clientes />
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Divisor">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>366</X>
+      <Y>237</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>divisorVertical</nameImg>
+  </ElementoRestaurante>
+  <ElementoRestaurante xsi:type="Divisor">
+    <esFija>false</esFija>
+    <Posicion>
+      <X>372</X>
+      <Y>447</Y>
+    </Posicion>
+    <Numero>0</Numero>
+    <Ocupado>false</Ocupado>
+    <Reservado>false</Reservado>
+    <Consumos />
+    <Permanencia>PT0S</Permanencia>
+    <Mozo>0</Mozo>
+    <nameImg>divisorVertical</nameImg>
+  </ElementoRestaurante>
+</ArrayOfElementoRestaurante>
