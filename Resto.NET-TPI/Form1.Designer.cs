@@ -31,12 +31,13 @@
             components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             archivoToolStripMenuItem = new ToolStripMenuItem();
+            nuevoPlanoToolStripMenuItem = new ToolStripMenuItem();
             guardarPlanoToolStripMenuItem = new ToolStripMenuItem();
             cargarPlanoToolStripMenuItem = new ToolStripMenuItem();
+            salirToolStripMenuItem = new ToolStripMenuItem();
             vistaToolStripMenuItem = new ToolStripMenuItem();
             modoEdiciónToolStripMenuItem = new ToolStripMenuItem();
             modoToolStripMenuItem = new ToolStripMenuItem();
-            statusStrip1 = new StatusStrip();
             panelHerramientas = new Panel();
             panel2 = new Panel();
             btnDeshacer = new Button();
@@ -90,30 +91,44 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { archivoToolStripMenuItem, vistaToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1370, 24);
+            menuStrip1.Size = new Size(1184, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // archivoToolStripMenuItem
             // 
-            archivoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { guardarPlanoToolStripMenuItem, cargarPlanoToolStripMenuItem });
+            archivoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { nuevoPlanoToolStripMenuItem, guardarPlanoToolStripMenuItem, cargarPlanoToolStripMenuItem, salirToolStripMenuItem });
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             archivoToolStripMenuItem.Size = new Size(60, 20);
             archivoToolStripMenuItem.Text = "Archivo";
             // 
+            // nuevoPlanoToolStripMenuItem
+            // 
+            nuevoPlanoToolStripMenuItem.Name = "nuevoPlanoToolStripMenuItem";
+            nuevoPlanoToolStripMenuItem.Size = new Size(149, 22);
+            nuevoPlanoToolStripMenuItem.Text = "Nuevo plano";
+            nuevoPlanoToolStripMenuItem.Click += nuevoPlanoToolStripMenuItem_Click;
+            // 
             // guardarPlanoToolStripMenuItem
             // 
             guardarPlanoToolStripMenuItem.Name = "guardarPlanoToolStripMenuItem";
-            guardarPlanoToolStripMenuItem.Size = new Size(180, 22);
+            guardarPlanoToolStripMenuItem.Size = new Size(149, 22);
             guardarPlanoToolStripMenuItem.Text = "Guardar plano";
             guardarPlanoToolStripMenuItem.Click += guardarPlanoToolStripMenuItem_Click;
             // 
             // cargarPlanoToolStripMenuItem
             // 
             cargarPlanoToolStripMenuItem.Name = "cargarPlanoToolStripMenuItem";
-            cargarPlanoToolStripMenuItem.Size = new Size(180, 22);
+            cargarPlanoToolStripMenuItem.Size = new Size(149, 22);
             cargarPlanoToolStripMenuItem.Text = "Cargar plano";
             cargarPlanoToolStripMenuItem.Click += cargarPlanoToolStripMenuItem_Click_1;
+            // 
+            // salirToolStripMenuItem
+            // 
+            salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            salirToolStripMenuItem.Size = new Size(149, 22);
+            salirToolStripMenuItem.Text = "Salir";
+            salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
             // 
             // vistaToolStripMenuItem
             // 
@@ -136,16 +151,6 @@
             modoToolStripMenuItem.Text = "Modo previsualización";
             modoToolStripMenuItem.Click += modoToolStripMenuItem_Click_1;
             // 
-            // statusStrip1
-            // 
-            statusStrip1.BackColor = SystemColors.Control;
-            statusStrip1.ImageScalingSize = new Size(24, 24);
-            statusStrip1.Location = new Point(0, 727);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1370, 22);
-            statusStrip1.TabIndex = 1;
-            statusStrip1.Text = "statusStrip1";
-            // 
             // panelHerramientas
             // 
             panelHerramientas.BorderStyle = BorderStyle.FixedSingle;
@@ -154,7 +159,7 @@
             panelHerramientas.Dock = DockStyle.Left;
             panelHerramientas.Location = new Point(0, 24);
             panelHerramientas.Name = "panelHerramientas";
-            panelHerramientas.Size = new Size(200, 703);
+            panelHerramientas.Size = new Size(200, 737);
             panelHerramientas.TabIndex = 2;
             // 
             // panel2
@@ -171,7 +176,7 @@
             panel2.Location = new Point(0, 36);
             panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(198, 665);
+            panel2.Size = new Size(198, 699);
             panel2.TabIndex = 1;
             // 
             // btnDeshacer
@@ -181,7 +186,7 @@
             btnDeshacer.Dock = DockStyle.Bottom;
             btnDeshacer.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDeshacer.ForeColor = SystemColors.ActiveCaptionText;
-            btnDeshacer.Location = new Point(0, 635);
+            btnDeshacer.Location = new Point(0, 669);
             btnDeshacer.Margin = new Padding(2);
             btnDeshacer.Name = "btnDeshacer";
             btnDeshacer.Size = new Size(198, 30);
@@ -199,7 +204,7 @@
             panelDivisor.Location = new Point(0, 425);
             panelDivisor.Margin = new Padding(2);
             panelDivisor.Name = "panelDivisor";
-            panelDivisor.Size = new Size(198, 240);
+            panelDivisor.Size = new Size(198, 274);
             panelDivisor.TabIndex = 4;
             // 
             // btnVertical
@@ -561,15 +566,15 @@
             panelDiseño.ForeColor = SystemColors.ControlText;
             panelDiseño.Location = new Point(200, 24);
             panelDiseño.Name = "panelDiseño";
-            panelDiseño.Size = new Size(1170, 703);
+            panelDiseño.Size = new Size(984, 737);
             panelDiseño.TabIndex = 3;
             // 
             // propertyGrid1
             // 
             propertyGrid1.Dock = DockStyle.Right;
-            propertyGrid1.Location = new Point(970, 0);
+            propertyGrid1.Location = new Point(784, 0);
             propertyGrid1.Name = "propertyGrid1";
-            propertyGrid1.Size = new Size(200, 703);
+            propertyGrid1.Size = new Size(200, 737);
             propertyGrid1.TabIndex = 0;
             propertyGrid1.Visible = false;
             // 
@@ -580,7 +585,7 @@
             miGrilla.Dock = DockStyle.Fill;
             miGrilla.Location = new Point(0, 0);
             miGrilla.Name = "miGrilla";
-            miGrilla.Size = new Size(1170, 703);
+            miGrilla.Size = new Size(984, 737);
             miGrilla.TabIndex = 1;
             // 
             // timer1
@@ -593,13 +598,13 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.bar;
-            ClientSize = new Size(1370, 749);
+            ClientSize = new Size(1184, 761);
             Controls.Add(panelDiseño);
             Controls.Add(panelHerramientas);
-            Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Resto.NET";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -629,7 +634,6 @@
         private ToolStripMenuItem vistaToolStripMenuItem;
         private ToolStripMenuItem modoEdiciónToolStripMenuItem;
         private ToolStripMenuItem modoToolStripMenuItem;
-        private StatusStrip statusStrip1;
         private Panel panelHerramientas;
         private Panel panelDiseño;
         private PropertyGrid propertyGrid1;
@@ -663,5 +667,7 @@
         private Button btnRec8;
         private Button btnCir8;
         private System.Windows.Forms.Timer timer1;
+        private ToolStripMenuItem nuevoPlanoToolStripMenuItem;
+        private ToolStripMenuItem salirToolStripMenuItem;
     }
 }

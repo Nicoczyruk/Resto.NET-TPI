@@ -1,4 +1,5 @@
 using Resto.NET_TPI.Properties;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -23,9 +24,14 @@ namespace Resto.NET_TPI
             InitializeComponent();
             VisibilidadInicial(); //Ocultar paneles menu
 
+            // Deshabilitar el redimensionamiento del formulario
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // Esto evita que se pueda cambiar el tamaño
+            this.MaximizeBox = false; // Esto desactiva el botón de maximizar en la esquina superior derecha
+
             miGrilla.Visible = false; //Por defecto se va a iniciar apagada. 
             miGrilla.BackgroundImageLayout = ImageLayout.Stretch;//Ajustar imagen al tamaño
             panelDiseño.BackgroundImageLayout = ImageLayout.Stretch;
+
 
             panelDiseño.EnableDoubleBuffering(); //Tecnica de renderizado secundario  [] -> muestra picture box
             miGrilla.EnableDoubleBuffering();
@@ -41,7 +47,7 @@ namespace Resto.NET_TPI
             //por defecto, inicializar el programa en modo previsualizacion
             esModoPrevisualizacion = true;
             miGrilla.Visible = false;
-            panelHerramientas.Visible = false;
+            panelHerramientas.Enabled = false;
             ActualizarVisibilidadLabels();
         }
         private void VisibilidadInicial()
@@ -80,6 +86,7 @@ namespace Resto.NET_TPI
                 infoLabel = new Label();
                 infoLabel.Tag = pictureBox;
                 infoLabel.AutoSize = true;
+                infoLabel.Font = new Font(infoLabel.Font, FontStyle.Bold);
                 panelDiseño.Controls.Add(infoLabel);
             }
 
@@ -116,7 +123,9 @@ namespace Resto.NET_TPI
                 else if (mesa.Clientes.Count > 0)
                 {
                     mesa.Ocupado = true;
-                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nClientes: {clientes}\nConsumo: ${totalConsumo:F2}";
+                    TimeSpan permanencia = mesa.RelojPermanencia.Elapsed;
+                    string tiempoPermanencia = $"{permanencia.Minutes:D2}:{permanencia.Seconds:D2}";
+                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nClientes: {clientes}\nConsumo: ${totalConsumo:F2}\nPermanencia: {tiempoPermanencia}";
                 }
                 else
                 {
@@ -163,7 +172,9 @@ namespace Resto.NET_TPI
                 else if (silla.Ocupado)
                 {
                     silla.Reservado = false;
-                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nCliente: {cliente}\n{consumosTexto:F2}";
+                    TimeSpan permanencia = silla.RelojPermanencia.Elapsed;
+                    string tiempoPermanencia = $"{permanencia.Minutes:D2}:{permanencia.Seconds:D2}";
+                    infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nCliente: {cliente}\n{consumosTexto:F2}\nPermanencia: {tiempoPermanencia}";
 
                 }
                 else
@@ -217,8 +228,21 @@ namespace Resto.NET_TPI
 
                 if (pictureBox != null)
                 {
+                    if (elemento.Ocupado && !elemento.RelojPermanencia.IsRunning)
+                    {
+                        elemento.RelojPermanencia.Start();
+                    }
+                    else if (!elemento.Ocupado)
+                    {
+                        if (elemento.RelojPermanencia.IsRunning)
+                        {
+                            elemento.RelojPermanencia.Stop();
+                        }
+                        elemento.RelojPermanencia.Reset();
+                        elemento.Permanencia = TimeSpan.Zero;
+                    }
                     // Actualizar la interfaz del PictureBox (por ejemplo, el Label asociado)
-                    ActualizarElementoInterfaz(pictureBox, elemento);
+                    //ActualizarElementoInterfaz(pictureBox, elemento);
                 }
             }
         }
@@ -254,7 +278,7 @@ namespace Resto.NET_TPI
         {
             esModoPrevisualizacion = true;
             miGrilla.Visible = false;
-            panelHerramientas.Visible = false;
+            panelHerramientas.Enabled = false;
             ActualizarVisibilidadLabels();
             ActualizarEstadoEliminarItem();
             timer1.Start();
@@ -264,7 +288,7 @@ namespace Resto.NET_TPI
             esModoPrevisualizacion = false;
             miGrilla.Visible = true;
             propertyGrid1.Visible = false;
-            panelHerramientas.Visible = true;
+            panelHerramientas.Enabled = true;
             ActualizarVisibilidadLabels();
             ActualizarEstadoEliminarItem();
             timer1.Stop();
@@ -427,11 +451,6 @@ namespace Resto.NET_TPI
                     ultimaPosicion = arrastreImagen.Location;
                 }
             }
-
-            if (pictureBoxToElemento.TryGetValue(arrastreImagen, out ElementoRestaurante elemento))
-            {
-                elemento.Posicion = arrastreImagen.Location;
-            }
             // Cuando se suelta el botón del mouse, se restablece el PictureBox que se está arrastrando
             arrastreImagen = null;
 
@@ -504,11 +523,9 @@ namespace Resto.NET_TPI
                             return;
                         }
                         // Mostrar el objeto asociado a la PictureBox en el PropertyGrid
-
                         propertyGrid1.SelectedObject = pictureBoxToElemento[pictureBox];
-
-                        // Hacer visible el PropertyGrid
                         propertyGrid1.Visible = true;
+
 
                         // Actualizar la interfaz para reflejar cambios en el estado de ocupación
                         ElementoRestaurante elemento = pictureBoxToElemento[pictureBox];
@@ -701,7 +718,9 @@ namespace Resto.NET_TPI
                             else if (mesa.Clientes.Count > 0)
                             {
                                 mesa.Ocupado = true;
-                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nClientes: {clientes}\nConsumo: ${totalConsumo:F2}";
+                                TimeSpan permanencia = mesa.RelojPermanencia.Elapsed;
+                                string tiempoPermanencia = $"{permanencia.Minutes:D2}:{permanencia.Seconds:D2}";
+                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nClientes: {clientes}\nConsumo: ${totalConsumo:F2}\nPermanencia: {tiempoPermanencia}";
                             }
                             else
                             {
@@ -710,6 +729,12 @@ namespace Resto.NET_TPI
                                 mesa.Consumos.Clear();
                                 infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}";
                             }
+
+                            // Posicionar el Label sobre el PictureBox
+                            infoLabel.Location = new Point(pictureBox.Left, pictureBox.Top - infoLabel.Height);
+                            infoLabel.BringToFront();
+                            infoLabel.Visible = esModoPrevisualizacion;  // Mostrar solo en modo previsualización
+
                         }
 
                         if (elemento is Silla silla)
@@ -748,7 +773,9 @@ namespace Resto.NET_TPI
                             else if (silla.Ocupado)
                             {
                                 silla.Reservado = false;
-                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nCliente: {cliente}\n{consumosTexto:F2}";
+                                TimeSpan permanencia = silla.RelojPermanencia.Elapsed;
+                                string tiempoPermanencia = $"{permanencia.Minutes:D2}:{permanencia.Seconds:D2}";
+                                infoLabel.Text = $"#{numero}\nEstado: {ocupadoTexto}\nMozo: {mozoAsignado}\nCliente: {cliente}\n{consumosTexto:F2}\nPermanencia: {tiempoPermanencia}";
 
                             }
                             else
@@ -760,13 +787,14 @@ namespace Resto.NET_TPI
                             infoLabel.Location = new Point(pictureBox.Left, pictureBox.Top - infoLabel.Height);
                             infoLabel.BringToFront();
                             infoLabel.Visible = esModoPrevisualizacion;  // Mostrar solo en modo previsualización
+
                         }
                     }
                 }
             }
         }
 
-        private void guardarPlanoToolStripMenuItem_Click(object sender, EventArgs e)//MUDAR
+        private void guardarPlanoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -786,9 +814,24 @@ namespace Resto.NET_TPI
                 }
             }
 
-       
 
 
+
+        }
+
+        private void ResetearPlano()
+        {
+            pictureBoxToElemento.Clear();
+            paneles.Clear();
+            panelDiseño.Controls.Clear();
+            panelDiseño.Controls.Add(propertyGrid1);
+            panelDiseño.Controls.Add(miGrilla);
+            esModoPrevisualizacion = true;
+            miGrilla.Visible = false;
+            panelHerramientas.Visible = false;
+            ActualizarVisibilidadLabels();
+            ActualizarEstadoEliminarItem();
+            timer1.Start();
         }
 
         private void cargarPlanoToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -798,9 +841,7 @@ namespace Resto.NET_TPI
                 return;
             }
 
-            pictureBoxToElemento.Clear();
-            paneles.Clear();
-            panelDiseño.Controls.Clear();
+            ResetearPlano();
 
             var fileContent = string.Empty;
             var filePath = string.Empty;
@@ -828,11 +869,52 @@ namespace Resto.NET_TPI
                             foreach (var elemento in elementos)
                             {
                                 Image imagen = (Image)Resources.ResourceManager.GetObject(elemento.nameImg);
+                                if (elemento.Ocupado && !elemento.RelojPermanencia.IsRunning)
+                                {
+                                    elemento.RelojPermanencia.Start();
+                                }
+                                else if (!elemento.Ocupado)
+                                {
+                                    if (elemento.RelojPermanencia.IsRunning)
+                                    {
+                                        elemento.RelojPermanencia.Stop();
+                                    }
+                                    elemento.RelojPermanencia.Reset();
+                                    elemento.Permanencia = TimeSpan.Zero;
+                                }
                                 CargarImagen(imagen, elemento);
+
                             }
                         }
                     }
                 }
+            }
+        }
+
+        private void nuevoPlanoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Mostrar cuadro de diálogo de confirmación
+            DialogResult result = MessageBox.Show("Los cambios no guardados se perderán. ¿Desea continuar?", "Confirmar Nuevo Plano",
+                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                // Si elige "Sí", resetear el plano
+                ResetearPlano();
+            }
+
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Mostrar cuadro de diálogo de confirmación opcional
+            DialogResult result = MessageBox.Show("¿Está seguro de que desea salir de la aplicación?", "Confirmar Salida",
+                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // Salir de la aplicación
+                Application.Exit();
             }
         }
     }
