@@ -10,6 +10,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Resto.NET_TPI
 {
+    //GITHUB del proyecto: https://github.com/Nicoczyruk/Resto.NET-TPI
+
+    //Colaboradores: 
+    //Marianela Holsbach
+    //Virginia Ayala
+    //Sanchez Abigail
+    //Melgarejo Brenda
+    //Aguirre Gonzalo
     public partial class Form1 : Form
     {
         private PictureBox arrastreImagen = null; //controla el arrastre de la imagen. Cuando suelte el usuario se marcará null
