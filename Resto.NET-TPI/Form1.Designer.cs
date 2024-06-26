@@ -105,60 +105,60 @@
             // archivoToolStripMenuItem
             // 
             archivoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { nuevoPlanoToolStripMenuItem, guardarPlanoToolStripMenuItem, cargarPlanoToolStripMenuItem, salirToolStripMenuItem });
-            archivoToolStripMenuItem.Font = new Font("Maiandra GD", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            archivoToolStripMenuItem.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             archivoToolStripMenuItem.ForeColor = Color.FromArgb(237, 237, 228);
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            archivoToolStripMenuItem.Size = new Size(59, 20);
+            archivoToolStripMenuItem.Size = new Size(58, 20);
             archivoToolStripMenuItem.Text = "Archivo";
             // 
             // nuevoPlanoToolStripMenuItem
             // 
             nuevoPlanoToolStripMenuItem.Name = "nuevoPlanoToolStripMenuItem";
-            nuevoPlanoToolStripMenuItem.Size = new Size(151, 22);
+            nuevoPlanoToolStripMenuItem.Size = new Size(153, 22);
             nuevoPlanoToolStripMenuItem.Text = "Nuevo plano";
             nuevoPlanoToolStripMenuItem.Click += nuevoPlanoToolStripMenuItem_Click;
             // 
             // guardarPlanoToolStripMenuItem
             // 
             guardarPlanoToolStripMenuItem.Name = "guardarPlanoToolStripMenuItem";
-            guardarPlanoToolStripMenuItem.Size = new Size(151, 22);
+            guardarPlanoToolStripMenuItem.Size = new Size(153, 22);
             guardarPlanoToolStripMenuItem.Text = "Guardar plano";
             guardarPlanoToolStripMenuItem.Click += guardarPlanoToolStripMenuItem_Click;
             // 
             // cargarPlanoToolStripMenuItem
             // 
             cargarPlanoToolStripMenuItem.Name = "cargarPlanoToolStripMenuItem";
-            cargarPlanoToolStripMenuItem.Size = new Size(151, 22);
+            cargarPlanoToolStripMenuItem.Size = new Size(153, 22);
             cargarPlanoToolStripMenuItem.Text = "Cargar plano";
             cargarPlanoToolStripMenuItem.Click += cargarPlanoToolStripMenuItem_Click_1;
             // 
             // salirToolStripMenuItem
             // 
             salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            salirToolStripMenuItem.Size = new Size(151, 22);
+            salirToolStripMenuItem.Size = new Size(153, 22);
             salirToolStripMenuItem.Text = "Salir";
             salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
             // 
             // vistaToolStripMenuItem
             // 
             vistaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { modoEdiciónToolStripMenuItem, modoToolStripMenuItem });
-            vistaToolStripMenuItem.Font = new Font("Maiandra GD", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            vistaToolStripMenuItem.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             vistaToolStripMenuItem.ForeColor = Color.FromArgb(237, 237, 228);
             vistaToolStripMenuItem.Name = "vistaToolStripMenuItem";
-            vistaToolStripMenuItem.Size = new Size(44, 20);
+            vistaToolStripMenuItem.Size = new Size(45, 20);
             vistaToolStripMenuItem.Text = "Vista";
             // 
             // modoEdiciónToolStripMenuItem
             // 
             modoEdiciónToolStripMenuItem.Name = "modoEdiciónToolStripMenuItem";
-            modoEdiciónToolStripMenuItem.Size = new Size(192, 22);
+            modoEdiciónToolStripMenuItem.Size = new Size(197, 22);
             modoEdiciónToolStripMenuItem.Text = "Modo edición";
             modoEdiciónToolStripMenuItem.Click += modoEdiciónToolStripMenuItem_Click_1;
             // 
             // modoToolStripMenuItem
             // 
             modoToolStripMenuItem.Name = "modoToolStripMenuItem";
-            modoToolStripMenuItem.Size = new Size(192, 22);
+            modoToolStripMenuItem.Size = new Size(197, 22);
             modoToolStripMenuItem.Text = "Modo previsualización";
             modoToolStripMenuItem.Click += modoToolStripMenuItem_Click_1;
             // 
@@ -223,12 +223,12 @@
             btnVertical.AutoSize = true;
             btnVertical.BackColor = Color.FromArgb(237, 237, 228);
             btnVertical.Dock = DockStyle.Top;
-            btnVertical.Font = new Font("Maiandra GD", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnVertical.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnVertical.ForeColor = SystemColors.ActiveCaptionText;
-            btnVertical.Location = new Point(0, 32);
+            btnVertical.Location = new Point(0, 34);
             btnVertical.Margin = new Padding(2);
             btnVertical.Name = "btnVertical";
-            btnVertical.Size = new Size(198, 32);
+            btnVertical.Size = new Size(198, 34);
             btnVertical.TabIndex = 6;
             btnVertical.Text = "Vertical";
             btnVertical.UseVisualStyleBackColor = false;
@@ -239,12 +239,12 @@
             bntHorizontal.AutoSize = true;
             bntHorizontal.BackColor = Color.FromArgb(237, 237, 228);
             bntHorizontal.Dock = DockStyle.Top;
-            bntHorizontal.Font = new Font("Maiandra GD", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            bntHorizontal.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             bntHorizontal.ForeColor = SystemColors.ActiveCaptionText;
             bntHorizontal.Location = new Point(0, 0);
             bntHorizontal.Margin = new Padding(2);
             bntHorizontal.Name = "bntHorizontal";
-            bntHorizontal.Size = new Size(198, 32);
+            bntHorizontal.Size = new Size(198, 34);
             bntHorizontal.TabIndex = 5;
             bntHorizontal.Text = "Horizontal";
             bntHorizontal.UseVisualStyleBackColor = false;
@@ -256,7 +256,7 @@
             btnDivisor.BackColor = Color.FromArgb(123, 124, 132);
             btnDivisor.Dock = DockStyle.Top;
             btnDivisor.FlatStyle = FlatStyle.Popup;
-            btnDivisor.Font = new Font("Maiandra GD", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnDivisor.Font = new Font("Microsoft Sans Serif", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnDivisor.ForeColor = Color.FromArgb(237, 237, 228);
             btnDivisor.Location = new Point(0, 440);
             btnDivisor.Margin = new Padding(2);
@@ -273,7 +273,7 @@
             btnSilla.BackColor = Color.FromArgb(123, 124, 132);
             btnSilla.Dock = DockStyle.Top;
             btnSilla.FlatStyle = FlatStyle.Popup;
-            btnSilla.Font = new Font("Maiandra GD", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSilla.Font = new Font("Microsoft Sans Serif", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnSilla.ForeColor = Color.FromArgb(237, 237, 228);
             btnSilla.Location = new Point(0, 400);
             btnSilla.Margin = new Padding(2);
@@ -319,7 +319,7 @@
             // 
             btnRec8.BackColor = Color.FromArgb(237, 237, 228);
             btnRec8.Dock = DockStyle.Top;
-            btnRec8.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnRec8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnRec8.ForeColor = SystemColors.ActiveCaptionText;
             btnRec8.Location = new Point(0, 30);
             btnRec8.Margin = new Padding(2);
@@ -334,7 +334,7 @@
             // 
             btnCir8.BackColor = Color.FromArgb(237, 237, 228);
             btnCir8.Dock = DockStyle.Top;
-            btnCir8.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnCir8.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnCir8.ForeColor = SystemColors.ActiveCaptionText;
             btnCir8.Location = new Point(0, 0);
             btnCir8.Margin = new Padding(2);
@@ -349,7 +349,7 @@
             // 
             btnMesa8.BackColor = Color.FromArgb(234, 209, 196);
             btnMesa8.Dock = DockStyle.Top;
-            btnMesa8.Font = new Font("Maiandra GD", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMesa8.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnMesa8.ForeColor = Color.FromArgb(123, 124, 132);
             btnMesa8.Location = new Point(0, 268);
             btnMesa8.Margin = new Padding(2);
@@ -377,7 +377,7 @@
             // 
             btnRec6.BackColor = Color.FromArgb(237, 237, 228);
             btnRec6.Dock = DockStyle.Top;
-            btnRec6.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnRec6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnRec6.ForeColor = SystemColors.ActiveCaptionText;
             btnRec6.Location = new Point(0, 30);
             btnRec6.Margin = new Padding(2);
@@ -392,7 +392,7 @@
             // 
             btnCir6.BackColor = Color.FromArgb(237, 237, 228);
             btnCir6.Dock = DockStyle.Top;
-            btnCir6.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnCir6.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnCir6.ForeColor = SystemColors.ActiveCaptionText;
             btnCir6.Location = new Point(0, 0);
             btnCir6.Margin = new Padding(2);
@@ -407,7 +407,7 @@
             // 
             btnMesa6.BackColor = Color.FromArgb(234, 209, 196);
             btnMesa6.Dock = DockStyle.Top;
-            btnMesa6.Font = new Font("Maiandra GD", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMesa6.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnMesa6.ForeColor = Color.FromArgb(123, 124, 132);
             btnMesa6.Location = new Point(0, 180);
             btnMesa6.Margin = new Padding(2);
@@ -435,7 +435,7 @@
             // 
             btnRec4.BackColor = Color.FromArgb(237, 237, 228);
             btnRec4.Dock = DockStyle.Top;
-            btnRec4.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnRec4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnRec4.ForeColor = SystemColors.ActiveCaptionText;
             btnRec4.Location = new Point(0, 30);
             btnRec4.Margin = new Padding(2);
@@ -450,7 +450,7 @@
             // 
             bntCir4.BackColor = Color.FromArgb(237, 237, 228);
             bntCir4.Dock = DockStyle.Top;
-            bntCir4.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            bntCir4.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             bntCir4.ForeColor = SystemColors.ActiveCaptionText;
             bntCir4.Location = new Point(0, 0);
             bntCir4.Margin = new Padding(2);
@@ -465,7 +465,7 @@
             // 
             btnMesa4.BackColor = Color.FromArgb(234, 209, 196);
             btnMesa4.Dock = DockStyle.Top;
-            btnMesa4.Font = new Font("Maiandra GD", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMesa4.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnMesa4.ForeColor = Color.FromArgb(123, 124, 132);
             btnMesa4.Location = new Point(0, 90);
             btnMesa4.Margin = new Padding(2);
@@ -494,7 +494,7 @@
             // 
             btnRec2.BackColor = Color.FromArgb(237, 237, 228);
             btnRec2.Dock = DockStyle.Top;
-            btnRec2.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnRec2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             btnRec2.ForeColor = SystemColors.ActiveCaptionText;
             btnRec2.Location = new Point(0, 30);
             btnRec2.Margin = new Padding(2);
@@ -509,7 +509,7 @@
             // 
             bntCircular2.BackColor = Color.FromArgb(237, 237, 228);
             bntCircular2.Dock = DockStyle.Top;
-            bntCircular2.Font = new Font("Maiandra GD", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            bntCircular2.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             bntCircular2.ForeColor = SystemColors.ActiveCaptionText;
             bntCircular2.Location = new Point(0, 0);
             bntCircular2.Margin = new Padding(2);
@@ -524,7 +524,7 @@
             // 
             btnMesa2.BackColor = Color.FromArgb(234, 209, 196);
             btnMesa2.Dock = DockStyle.Top;
-            btnMesa2.Font = new Font("Maiandra GD", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMesa2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnMesa2.ForeColor = Color.FromArgb(130, 124, 132);
             btnMesa2.Location = new Point(0, 0);
             btnMesa2.Margin = new Padding(2);
@@ -540,7 +540,7 @@
             btnMesa.BackColor = Color.FromArgb(123, 124, 132);
             btnMesa.Dock = DockStyle.Top;
             btnMesa.FlatStyle = FlatStyle.Popup;
-            btnMesa.Font = new Font("Maiandra GD", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnMesa.Font = new Font("Microsoft Sans Serif", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnMesa.ForeColor = Color.FromArgb(237, 237, 228);
             btnMesa.Location = new Point(0, 0);
             btnMesa.Margin = new Padding(2);
@@ -600,11 +600,23 @@
             // 
             // propertyGrid1
             // 
-            propertyGrid1.Dock = DockStyle.Right;
-            propertyGrid1.Location = new Point(798, 0);
+            propertyGrid1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            propertyGrid1.BackColor = Color.FromArgb(219, 212, 203);
+            propertyGrid1.CategorySplitterColor = Color.FromArgb(219, 212, 203);
+            propertyGrid1.CommandsBorderColor = Color.FromArgb(219, 212, 203);
+            propertyGrid1.CommandsForeColor = SystemColors.ActiveCaption;
+            propertyGrid1.Font = new Font("Segoe UI", 12F);
+            propertyGrid1.HelpVisible = false;
+            propertyGrid1.LineColor = Color.FromArgb(123, 124, 132);
+            propertyGrid1.Location = new Point(750, 0);
             propertyGrid1.Name = "propertyGrid1";
-            propertyGrid1.Size = new Size(186, 737);
+            propertyGrid1.PropertySort = PropertySort.Alphabetical;
+            propertyGrid1.RightToLeft = RightToLeft.No;
+            propertyGrid1.Size = new Size(234, 221);
             propertyGrid1.TabIndex = 0;
+            propertyGrid1.ToolbarVisible = false;
+            propertyGrid1.ViewBackColor = Color.FromArgb(219, 212, 203);
+            propertyGrid1.ViewBorderColor = Color.FromArgb(219, 212, 203);
             propertyGrid1.Visible = false;
             // 
             // miGrilla

@@ -37,5 +37,10 @@ namespace Resto.NET_TPI
 
             return consumos;
         }
+
+        public override string ToString()
+        {
+            return $"{Nombre} Consumos({Consumos.Count.ToString()}): ${Consumos.Sum(consumo => consumo.Precio)}";
+        }
     }
 }

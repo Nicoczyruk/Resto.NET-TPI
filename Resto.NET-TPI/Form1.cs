@@ -2,6 +2,7 @@ using Resto.NET_TPI.Properties;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -14,9 +15,8 @@ namespace Resto.NET_TPI
         private PictureBox arrastreImagen = null; //controla el arrastre de la imagen. Cuando suelte el usuario se marcará null
         private Point coordenadasImagen; //Se almacena las coordenadas de la imagen
         List<PictureBox> paneles = new List<PictureBox>(); //lista para borrar.
-        private Dictionary<PictureBox, ElementoRestaurante> pictureBoxToElemento = new Dictionary<PictureBox, ElementoRestaurante>();
-        private bool esModoPrevisualizacion = false;
-        private int contadorMesa = 0;
+        private Dictionary<PictureBox, ElementoRestaurante> pictureBoxToElemento = new Dictionary<PictureBox, ElementoRestaurante>(); //Lista principal para relacionar PictureBox + Objeto
+        private bool esModoPrevisualizacion;
         private Point ultimaPosicion;
         private List<Rectangle> areasRestringidas = new List<Rectangle>();
 
@@ -24,6 +24,17 @@ namespace Resto.NET_TPI
         {
             InitializeComponent();
             VisibilidadInicial(); //Ocultar paneles menu
+            
+            
+        }
+        private void VisibilidadInicial()
+        {
+            panelMesa.Visible = false;
+            panelDivisor.Visible = false;
+            panelMesa2.Visible = false;
+            panelMesa4.Visible = false;
+            panelMesa6.Visible = false;
+            panelMesa8.Visible = false;
 
             // Deshabilitar el redimensionamiento del formulario
             this.FormBorderStyle = FormBorderStyle.FixedSingle; // Esto evita que se pueda cambiar el tamaño
@@ -37,8 +48,6 @@ namespace Resto.NET_TPI
             panelDiseño.EnableDoubleBuffering(); //Tecnica de renderizado secundario  [] -> muestra picture box
             miGrilla.EnableDoubleBuffering();
 
-
-
             //Agregar manejador de eventos para el panelDiseño
             panelDiseño.MouseClick += PanelDiseño_MouseClick;
 
@@ -51,6 +60,7 @@ namespace Resto.NET_TPI
             panelHerramientas.Enabled = false;
             ActualizarVisibilidadLabels();
 
+            //Logica de limitadores para limitar las zonas donde no pueden existir mesas/sillas/divisores
             panelDiseño.Controls.Add(panelBaño);
             panelDiseño.Controls.Add(panelBarra);
             panelDiseño.Controls.Add(panelCocina);
@@ -60,16 +70,12 @@ namespace Resto.NET_TPI
             areasRestringidas.Add(new Rectangle(panelBarra.Location, panelBarra.Size));
             areasRestringidas.Add(new Rectangle(panelCocina.Location, panelCocina.Size));
             areasRestringidas.Add(new Rectangle(panelEntrada.Location, panelEntrada.Size));
-        }
-        private void VisibilidadInicial()
-        {
-            panelMesa.Visible = false;
-            panelDivisor.Visible = false;
-            panelMesa2.Visible = false;
-            panelMesa4.Visible = false;
-            panelMesa6.Visible = false;
-            panelMesa8.Visible = false;
 
+            // Eliminar los paneles del panelDiseño después de crear los rectángulos
+            panelDiseño.Controls.Remove(panelBaño);
+            panelDiseño.Controls.Remove(panelBarra);
+            panelDiseño.Controls.Remove(panelCocina);
+            panelDiseño.Controls.Remove(panelEntrada);
         }
 
         private void ActualizarElementoInterfaz(PictureBox pictureBox, ElementoRestaurante elemento)
@@ -253,7 +259,7 @@ namespace Resto.NET_TPI
                         elemento.Permanencia = TimeSpan.Zero;
                     }
                     // Actualizar la interfaz del PictureBox (por ejemplo, el Label asociado)
-                    //ActualizarElementoInterfaz(pictureBox, elemento);
+                    ActualizarElementoInterfaz(pictureBox, elemento);
                 }
             }
         }
@@ -384,14 +390,9 @@ namespace Resto.NET_TPI
                 EliminarLabelAsociado(pictureBox);
             };
 
-
-
             contextMenu.Items.Add(eliminarItem);
             pictureBox.ContextMenuStrip = contextMenu;
-
             paneles.Add(pictureBox);//se agrega a la lista por si se necesita eliminar
-
-
         }
 
         private void EliminarLabelAsociado(PictureBox pictureBox)
@@ -536,7 +537,7 @@ namespace Resto.NET_TPI
                         // Mostrar el objeto asociado a la PictureBox en el PropertyGrid
                         propertyGrid1.SelectedObject = pictureBoxToElemento[pictureBox];
                         propertyGrid1.Visible = true;
-
+                        
 
                         // Actualizar la interfaz para reflejar cambios en el estado de ocupación
                         ElementoRestaurante elemento = pictureBoxToElemento[pictureBox];
@@ -646,10 +647,6 @@ namespace Resto.NET_TPI
                     }
                 }
             }
-
-
-
-
         }
         private bool HayColision(Point posicion, Size tamano, Control ignoreControl)
         {
@@ -704,6 +701,19 @@ namespace Resto.NET_TPI
                     // Si se encuentra el Label asociado, actualizar su contenido
                     if (infoLabel != null)
                     {
+                        if (elemento.Ocupado && !elemento.RelojPermanencia.IsRunning)
+                        {
+                            elemento.RelojPermanencia.Start();
+                        }
+                        else if (!elemento.Ocupado)
+                        {
+                            if (elemento.RelojPermanencia.IsRunning)
+                            {
+                                elemento.RelojPermanencia.Stop();
+                            }
+                            elemento.RelojPermanencia.Reset();
+                            elemento.Permanencia = TimeSpan.Zero;
+                        }
                         // Actualizar el texto del Label
                         string numero = elemento.Numero == 0 ? "No asignado" : elemento.Numero.ToString();
 
@@ -815,27 +825,29 @@ namespace Resto.NET_TPI
 
         private void guardarPlanoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.Filter = "XML Files (*.xml)|*.xml";
             saveFileDialog1.RestoreDirectory = true;
             Stream myStream;
 
-
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                try
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<ElementoRestaurante>));
-                    serializer.Serialize(myStream, pictureBoxToElemento.Values.ToList());
-                    myStream.Close();
+                    if ((myStream = saveFileDialog1.OpenFile()) != null)
+                    {
+                        XmlSerializer serializer = new XmlSerializer(typeof(List<ElementoRestaurante>));
+                        serializer.Serialize(myStream, pictureBoxToElemento.Values.ToList());
+                        myStream.Close();
+                        MessageBox.Show("Guardado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al guardar el plano: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-
-
-
         }
 
         private void ResetearPlano()
@@ -867,7 +879,6 @@ namespace Resto.NET_TPI
             List<ElementoRestaurante> elementos;
             XmlSerializer serializer = new XmlSerializer(typeof(List<ElementoRestaurante>));
 
-
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "XML Files (*.xml)|*.xml";
@@ -879,36 +890,46 @@ namespace Resto.NET_TPI
 
                     var fileStream = openFileDialog.OpenFile();
 
-                    using (StreamReader reader = new StreamReader(fileStream))
+                    try
                     {
-                        if (fileStream.Length > 0)
+                        using (StreamReader reader = new StreamReader(fileStream))
                         {
-                            elementos = (List<ElementoRestaurante>)serializer.Deserialize(reader);
-
-                            foreach (var elemento in elementos)
+                            if (fileStream.Length > 0)
                             {
-                                Image imagen = (Image)Resources.ResourceManager.GetObject(elemento.nameImg);
-                                if (elemento.Ocupado && !elemento.RelojPermanencia.IsRunning)
-                                {
-                                    elemento.RelojPermanencia.Start();
-                                }
-                                else if (!elemento.Ocupado)
-                                {
-                                    if (elemento.RelojPermanencia.IsRunning)
-                                    {
-                                        elemento.RelojPermanencia.Stop();
-                                    }
-                                    elemento.RelojPermanencia.Reset();
-                                    elemento.Permanencia = TimeSpan.Zero;
-                                }
-                                CargarImagen(imagen, elemento);
+                                elementos = (List<ElementoRestaurante>)serializer.Deserialize(reader);
 
+                                foreach (var elemento in elementos)
+                                {
+                                    Image imagen = (Image)Resources.ResourceManager.GetObject(elemento.nameImg);
+                                    if (elemento.Ocupado && !elemento.RelojPermanencia.IsRunning)
+                                    {
+                                        elemento.RelojPermanencia.Start();
+                                    }
+                                    else if (!elemento.Ocupado)
+                                    {
+                                        if (elemento.RelojPermanencia.IsRunning)
+                                        {
+                                            elemento.RelojPermanencia.Stop();
+                                        }
+                                        elemento.RelojPermanencia.Reset();
+                                        elemento.Permanencia = TimeSpan.Zero;
+                                    }
+                                    CargarImagen(imagen, elemento);
+
+                                }
                             }
                         }
+                        MessageBox.Show("Plano cargado exitosamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al cargar el plano: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
         }
+
+
 
         private void nuevoPlanoToolStripMenuItem_Click(object sender, EventArgs e)
         {

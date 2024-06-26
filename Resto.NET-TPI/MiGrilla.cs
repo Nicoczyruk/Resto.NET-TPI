@@ -13,9 +13,9 @@ namespace Resto.NET_TPI
             Graphics g = e.Graphics;
 
             for (int x = 0; x <= this.Width; x += 20)
-                g.DrawLine(Pens.LightGray, x, 0, x, this.Height);
+                g.DrawLine(Pens.DarkGray, x, 0, x, this.Height);
             for (int y = 0; y <= this.Height; y += 20)
-                g.DrawLine(Pens.LightGray, 0, y, this.Width, y);
+                g.DrawLine(Pens.DarkGray, 0, y, this.Width, y);
         }
     }
 }

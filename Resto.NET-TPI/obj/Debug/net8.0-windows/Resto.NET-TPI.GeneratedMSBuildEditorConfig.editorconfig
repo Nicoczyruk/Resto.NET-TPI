@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Resto.NET_TPI
-build_property.ProjectDir = E:\Marketes\Desktop\TUP\Resto.NET-TPI-master\Resto.NET-TPI\
+build_property.ProjectDir = C:\Users\nicoc\source\repos\Resto.NET-TPI\Resto.NET-TPI\Resto.NET-TPI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

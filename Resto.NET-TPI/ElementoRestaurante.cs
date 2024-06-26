@@ -14,6 +14,7 @@ namespace Resto.NET_TPI
     [XmlRoot("ElementoRestaurante")]
     public abstract class ElementoRestaurante
     {
+        [ReadOnly(true)]
         public Point Posicion { get; set; }
         public int Numero { get; set; }
         [TypeConverter(typeof(SiNoConverter))]
