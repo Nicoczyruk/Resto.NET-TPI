@@ -63,6 +63,16 @@ namespace Resto.NET_TPI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap back {
+            get {
+                object obj = ResourceManager.GetObject("back", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Banqueta {
             get {
                 object obj = ResourceManager.GetObject("Banqueta", resourceCulture);
@@ -96,6 +106,16 @@ namespace Resto.NET_TPI.Properties {
         internal static System.Drawing.Bitmap divisorVertical {
             get {
                 object obj = ResourceManager.GetObject("divisorVertical", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap herramienta {
+            get {
+                object obj = ResourceManager.GetObject("herramienta", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
