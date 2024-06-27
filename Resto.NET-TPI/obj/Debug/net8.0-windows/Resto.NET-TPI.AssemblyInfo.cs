@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Resto.NET-TPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+589472a24b42e11b002d41fb9bc0080141437229")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f82cecb6966d18db747ddebfdee2cbd84cf40e6d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Resto.NET-TPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Resto.NET-TPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

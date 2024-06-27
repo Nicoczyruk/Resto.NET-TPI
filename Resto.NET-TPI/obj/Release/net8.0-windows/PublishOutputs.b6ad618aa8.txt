@@ -1,0 +1,5 @@
+C:\Users\nicoc\Desktop\RESTO.NET\Resto.NET-TPI.exe
+C:\Users\nicoc\Desktop\RESTO.NET\Resto.NET-TPI.dll
+C:\Users\nicoc\Desktop\RESTO.NET\Resto.NET-TPI.deps.json
+C:\Users\nicoc\Desktop\RESTO.NET\Resto.NET-TPI.runtimeconfig.json
+C:\Users\nicoc\Desktop\RESTO.NET\Resto.NET-TPI.pdb

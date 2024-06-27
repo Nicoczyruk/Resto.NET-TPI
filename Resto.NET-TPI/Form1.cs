@@ -116,7 +116,7 @@ namespace Resto.NET_TPI
             }
 
             // Actualizar el texto del Label
-            string numero = elemento.Numero == 0 ? "No asignado" : elemento.Numero.ToString();
+            string numero = elemento.Numero == 0 ? "No asignado" : elemento.Numero.ToString(); 
 
             string ocupadoTexto = elemento.Ocupado ? "Ocupada" : "Disponible";
 
@@ -249,7 +249,7 @@ namespace Resto.NET_TPI
             if (propertyGrid1.SelectedObject is ElementoRestaurante elemento)
             {
                 // Buscar el PictureBox asociado al ElementoRestaurante
-                var pictureBox = pictureBoxToElemento.FirstOrDefault(x => x.Value == elemento).Key;
+                var pictureBox = pictureBoxToElemento.FirstOrDefault(x => x.Value == elemento).Key; //LINQ
 
                 if (pictureBox != null)
                 {
@@ -364,7 +364,7 @@ namespace Resto.NET_TPI
             CargarImagen(nombre, divisor);
         }
 
-        private void CargarImagen(Image nombre, ElementoRestaurante elementoRestaurante)
+        private void CargarImagen(Image nombre, ElementoRestaurante elementoRestaurante) 
         {
             PictureBox pictureBox = new PictureBox();
             pictureBox.Image = nombre;
@@ -689,7 +689,7 @@ namespace Resto.NET_TPI
             return false;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e) // 1000ms = 1s
         {
             foreach (Control control in panelDiseño.Controls)
             {
@@ -875,11 +875,6 @@ namespace Resto.NET_TPI
 
         private void cargarPlanoToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            if (!esModoPrevisualizacion)
-            {
-                return;
-            }
-
             ResetearPlano();
 
             var fileContent = string.Empty;
@@ -950,7 +945,6 @@ namespace Resto.NET_TPI
                 // Si elige "Sí", resetear el plano
                 ResetearPlano();
             }
-
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)

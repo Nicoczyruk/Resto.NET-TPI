@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Resto.NET_TPI
+namespace Resto.NET_TPI 
 {
     public class SiNoConverter : BooleanConverter
     {
