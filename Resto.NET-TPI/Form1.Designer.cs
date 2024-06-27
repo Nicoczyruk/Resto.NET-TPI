@@ -170,7 +170,7 @@
             panelHerramientas.Dock = DockStyle.Left;
             panelHerramientas.Location = new Point(0, 24);
             panelHerramientas.Name = "panelHerramientas";
-            panelHerramientas.Size = new Size(200, 737);
+            panelHerramientas.Size = new Size(200, 705);
             panelHerramientas.TabIndex = 2;
             // 
             // panel2
@@ -186,7 +186,7 @@
             panel2.Location = new Point(0, 46);
             panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(198, 689);
+            panel2.Size = new Size(198, 658);
             panel2.TabIndex = 1;
             // 
             // btnDeshacer
@@ -197,7 +197,7 @@
             btnDeshacer.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDeshacer.ForeColor = SystemColors.ActiveCaptionText;
             btnDeshacer.Image = Properties.Resources.back;
-            btnDeshacer.Location = new Point(0, 629);
+            btnDeshacer.Location = new Point(0, 598);
             btnDeshacer.Margin = new Padding(2);
             btnDeshacer.Name = "btnDeshacer";
             btnDeshacer.Size = new Size(198, 60);
@@ -595,7 +595,7 @@
             panelDiseño.ForeColor = SystemColors.ControlText;
             panelDiseño.Location = new Point(200, 24);
             panelDiseño.Name = "panelDiseño";
-            panelDiseño.Size = new Size(984, 737);
+            panelDiseño.Size = new Size(984, 705);
             panelDiseño.TabIndex = 3;
             // 
             // propertyGrid1
@@ -630,7 +630,7 @@
             miGrilla.Dock = DockStyle.Fill;
             miGrilla.Location = new Point(0, 0);
             miGrilla.Name = "miGrilla";
-            miGrilla.Size = new Size(984, 737);
+            miGrilla.Size = new Size(984, 705);
             miGrilla.TabIndex = 1;
             // 
             // panelEntrada
@@ -644,21 +644,21 @@
             // 
             panelBarra.Location = new Point(0, 615);
             panelBarra.Name = "panelBarra";
-            panelBarra.Size = new Size(449, 100);
+            panelBarra.Size = new Size(449, 90);
             panelBarra.TabIndex = 2;
             // 
             // panelCocina
             // 
-            panelCocina.Location = new Point(747, 0);
+            panelCocina.Location = new Point(750, 0);
             panelCocina.Name = "panelCocina";
-            panelCocina.Size = new Size(234, 385);
+            panelCocina.Size = new Size(231, 385);
             panelCocina.TabIndex = 1;
             // 
             // panelBaño
             // 
             panelBaño.Location = new Point(0, 3);
             panelBaño.Name = "panelBaño";
-            panelBaño.Size = new Size(286, 232);
+            panelBaño.Size = new Size(280, 234);
             panelBaño.TabIndex = 0;
             // 
             // timer1
@@ -672,7 +672,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(123, 124, 132);
             BackgroundImage = Properties.Resources.bar;
-            ClientSize = new Size(1184, 761);
+            ClientSize = new Size(1184, 729);
             Controls.Add(panelDiseño);
             Controls.Add(panelHerramientas);
             Controls.Add(menuStrip1);
